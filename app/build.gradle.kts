@@ -46,7 +46,12 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:1.1.3")
     implementation("androidx.navigation:navigation-fragment:2.2.1")
     implementation("androidx.navigation:navigation-ui:2.2.1")
-    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation("androidx.recyclerview:recyclerview:1.1.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.2.0")
+
     implementation("androidx.navigation:navigation-fragment-ktx:2.2.1")
     implementation("androidx.navigation:navigation-ui-ktx:2.2.1")
     implementation("androidx.room:room-runtime:2.2.4")

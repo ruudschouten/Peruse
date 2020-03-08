@@ -1,13 +1,13 @@
-package com.ruurd.peruse.ui.writers
+package com.ruurd.peruse.ui.fragments.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class WritersViewModel : ViewModel() {
+class SeriesViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "Writers Fragment"
+        value = "Series Fragment"
     }
     val text: LiveData<String> = _text
 }

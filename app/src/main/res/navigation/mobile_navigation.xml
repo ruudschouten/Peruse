@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_library"
-        android:name="com.ruurd.peruse.ui.library.LibraryFragment"
+        android:name="com.ruurd.peruse.ui.fragments.LibraryFragment"
         android:label="@string/title_library"
         tools:layout="@layout/fragment_library" />
 
     <fragment
         android:id="@+id/navigation_writers"
-        android:name="com.ruurd.peruse.ui.writers.WritersFragment"
+        android:name="com.ruurd.peruse.ui.fragments.WritersFragment"
         android:label="@string/title_writers"
         tools:layout="@layout/fragment_writers" />
 
     <fragment
         android:id="@+id/navigation_series"
-        android:name="com.ruurd.peruse.ui.series.SeriesFragment"
+        android:name="com.ruurd.peruse.ui.fragments.SeriesFragment"
         android:label="@string/title_series"
         tools:layout="@layout/fragment_series" />
 </navigation>
