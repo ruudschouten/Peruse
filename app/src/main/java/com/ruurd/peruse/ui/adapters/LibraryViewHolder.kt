@@ -3,6 +3,7 @@ package com.ruurd.peruse.ui.adapters
 import android.view.View
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.ruurd.peruse.models.Book
 import kotlinx.android.synthetic.main.recycler_library_book.view.*
 
@@ -20,6 +21,7 @@ class LibraryViewHolder(v: View) : RecyclerView.ViewHolder(v) {
 
         view.setOnClickListener {
             // TODO: Navigate to book activity/dialog
+            Snackbar.make(view, String.format("Clicked %s!", book.title), 1000).show()
         }
     }
 }
