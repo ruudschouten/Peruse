@@ -15,7 +15,7 @@ class LibraryViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         this.book = book
 
         view.library_book_title.text = book.title
-        view.library_book_average_time.text = String.format("Chapters read %s", book.averageTime())
+        view.library_book_average_time.text = String.format("Average Time %.2f", book.averageTime())
         view.library_book_chapter_count.text = String.format("Chapters read %s", book.chapters.size)
 
         view.setOnClickListener {
