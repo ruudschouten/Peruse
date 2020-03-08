@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_library">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.ruurd.peruse.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_library"
+        android:name="com.ruurd.peruse.ui.library.LibraryFragment"
+        android:label="@string/title_library"
+        tools:layout="@layout/fragment_library" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.ruurd.peruse.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_writers"
+        android:name="com.ruurd.peruse.ui.writers.WritersFragment"
+        android:label="@string/title_writers"
+        tools:layout="@layout/fragment_writers" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.ruurd.peruse.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_series"
+        android:name="com.ruurd.peruse.ui.series.SeriesFragment"
+        android:label="@string/title_series"
+        tools:layout="@layout/fragment_series" />
 </navigation>
