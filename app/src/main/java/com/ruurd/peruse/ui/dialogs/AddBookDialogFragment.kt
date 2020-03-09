@@ -26,7 +26,7 @@ class AddBookDialogFragment : DialogFragment() {
 
         val bookTitleTextEdit = root.findViewById<EditText>(R.id.dialog_book_title)
         val seriesSpinner = root.findViewById<Spinner>(R.id.dialog_book_series_spinner)
-        val writerSpinner = root.findViewById<Spinner>(R.id.dialog_book_writer_spinner)
+        val writerSpinner = root.findViewById<Spinner>(R.id.dialog_book_author_spinner)
         val cancelButton = root.findViewById<Button>(R.id.dialog_book_btn_cancel)
         val addButton = root.findViewById<Button>(R.id.dialog_book_btn_add)
 
