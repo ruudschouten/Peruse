@@ -11,11 +11,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.ruurd.peruse.R
-import com.ruurd.peruse.models.Book
-import com.ruurd.peruse.models.Chapter
 import com.ruurd.peruse.ui.adapters.LibraryRecyclerViewAdapter
+import com.ruurd.peruse.ui.dialogs.AddBookDialogFragment
 import com.ruurd.peruse.ui.fragments.viewmodels.LibraryViewModel
 
 class LibraryFragment : Fragment() {
@@ -45,7 +43,7 @@ class LibraryFragment : Fragment() {
 
         val addBookFab: FloatingActionButton = root.findViewById(R.id.fab_add_book)
         addBookFab.setOnClickListener {
-            Snackbar.make(root, "Adding new book :)", 500).show()
+            AddBookDialogFragment().show(parentFragmentManager, "new_book")
         }
         return root
     }
