@@ -1,6 +1,9 @@
 package com.ruurd.peruse.models
 
-data class Book(var title: String, var chapters: MutableList<Chapter>) {
+data class Book(
+    var title: String,
+    var chapters: MutableList<Chapter>
+) {
     fun addChapter(chapter: Chapter) {
         chapters.add(chapter)
     }
