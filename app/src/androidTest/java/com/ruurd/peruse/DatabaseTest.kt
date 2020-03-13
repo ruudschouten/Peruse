@@ -26,7 +26,6 @@ import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
 class DatabaseTest {
-
     private lateinit var db: AppDatabase
     private lateinit var bookRepository: BookRepository
     private lateinit var chapterRepository: ChapterRepository
@@ -73,7 +72,6 @@ class DatabaseTest {
         seriesRepository.insert(SeriesPOJO("American Gods"))
         val series = seriesRepository.get()
         assert(series.size == 1)
-
 
         val book = BookPOJO("Anansi Boys", authors[0].authorId, series[0].seriesId, 2f)
         val id = bookRepository.insert(book)
