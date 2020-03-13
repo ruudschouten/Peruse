@@ -5,6 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "authors")
 data class AuthorPOJO(
-    @PrimaryKey(autoGenerate = true) val authorId: Int,
     val name: String
-)
+) {
+    @PrimaryKey(autoGenerate = true)
+    var authorId: Long = 0
+}

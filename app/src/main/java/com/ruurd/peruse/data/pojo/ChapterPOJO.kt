@@ -5,9 +5,22 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "chapters")
 data class ChapterPOJO(
-    @PrimaryKey(autoGenerate = true) val chapterId: Int,
-    val bookId: Int,
     val title: String,
-    val pages: Int,
-    val duration: Long
-)
+    var pages: Int,
+    var duration: Long,
+    var bookId: Long
+) {
+    constructor(
+        title: String,
+        pages: Int
+    ) : this(title, pages, 0, 0)
+
+    constructor(
+        title: String,
+        pages: Int,
+        duration: Long
+    ) : this(title, pages, duration, 0)
+
+    @PrimaryKey(autoGenerate = true)
+    var chapterId: Long = 0
+}
