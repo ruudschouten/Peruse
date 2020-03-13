@@ -10,12 +10,18 @@ interface ChapterDao {
     @Query("SELECT * FROM chapters")
     fun getChapters(): List<ChapterPOJO>
 
-    @Query("SELECT * FROM chapters WHERE bookId = :bookId")
-    fun getChapters(bookId: Int): List<ChapterPOJO>
+    @Query("SELECT * FROM chapters WHERE bookId is :bookId")
+    fun getChapters(bookId: Long): List<ChapterPOJO>
+
+    @Query("SELECT * FROM chapters WHERE chapterId is :id ORDER BY chapterId ASC LIMIT 1")
+    fun get(id: Long) : ChapterPOJO
 
     @Insert
-    fun insert(vararg chapterPOJO: ChapterPOJO)
-    
+    fun insert(chapterPOJO: ChapterPOJO): Long
+
     @Insert
-    fun insertAll(chapters: List<ChapterPOJO>)
+    fun insert(vararg chapterPOJO: ChapterPOJO): List<Long>
+
+    @Insert
+    fun insertAll(chapters: List<ChapterPOJO>): List<Long>
 }

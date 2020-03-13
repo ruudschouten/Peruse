@@ -12,11 +12,20 @@ interface BookDao {
     @Query("SELECT * FROM books")
     fun getFullBooks(): List<FullBookPOJO>
 
+    @Query("SELECT * FROM books WHERE bookId is :id ORDER BY bookId ASC LIMIT 1")
+    fun getFull(id: Long): FullBookPOJO
+
     @Query("SELECT * FROM books")
-    fun getBooks() : List<BookPOJO>
+    fun getBooks(): List<BookPOJO>
+
+    @Query("SELECT * FROM books WHERE bookId is :id ORDER BY bookId ASC LIMIT 1")
+    fun get(id: Long): BookPOJO
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(vararg bookPOJO: BookPOJO)
+    fun insert(bookPOJO: BookPOJO): Long
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insert(vararg bookPOJO: BookPOJO): List<Long>
 
     @Update
     fun update(vararg bookPOJO: BookPOJO)

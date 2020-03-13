@@ -11,6 +11,15 @@ interface AuthorDao {
     @Query("SELECT * FROM authors")
     fun getAuthors(): List<AuthorPOJO>
 
+    @Query("SELECT * FROM authors WHERE name is :name")
+    fun getByName(name: String): List<AuthorPOJO>
+
+    @Query("SELECT * FROM authors WHERE authorId is :id ORDER BY authorId ASC LIMIT 1")
+    fun getById(id: Long): AuthorPOJO
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(vararg authorPOJO: AuthorPOJO)
+    fun insert(authorPOJO: AuthorPOJO): Long
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insert(vararg authorPOJO: AuthorPOJO): List<Long>
 }
