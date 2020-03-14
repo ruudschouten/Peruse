@@ -22,7 +22,7 @@ data class FullBookPOJO(
         parentColumn = "bookSeriesId",
         entityColumn = "seriesId"
     )
-    val series: SeriesPOJO
+    val series: SeriesPOJO?
 ) : PojoToModel<Book> {
     override fun toModel(): Book {
         val chapters = mutableListOf<Chapter>()
@@ -31,7 +31,7 @@ data class FullBookPOJO(
             book.title,
             chapters,
             author.toModel(),
-            series.toModel(),
+            series?.toModel(),
             book.seriesEntry
         )
     }
