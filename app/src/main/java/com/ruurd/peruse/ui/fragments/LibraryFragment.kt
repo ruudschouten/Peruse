@@ -36,9 +36,8 @@ class LibraryFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = libraryAdapter
 
-        viewModel.getBooks().observe(viewLifecycleOwner, Observer { books ->
-            libraryAdapter.overwriteBooks(books)
-            libraryAdapter.notifyDataSetChanged()
+        viewModel.getBooks.observe(viewLifecycleOwner, Observer { books ->
+            libraryAdapter.setBooks(books)
         })
 
         val addBookFab: FloatingActionButton = root.findViewById(R.id.fab_add_book)

@@ -5,15 +5,17 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.ruurd.peruse.R
+import com.ruurd.peruse.data.pojo.FullBookPOJO
 import com.ruurd.peruse.models.Book
 
 class LibraryRecyclerViewAdapter(
-    private var books: MutableList<Book>,
+    private var books: List<FullBookPOJO>,
     private val navController: NavController
 ) : RecyclerView.Adapter<LibraryViewHolder>() {
 
-    fun overwriteBooks(books: MutableList<Book>) {
+    fun setBooks(books: List<FullBookPOJO>) {
         this.books = books
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LibraryViewHolder {
