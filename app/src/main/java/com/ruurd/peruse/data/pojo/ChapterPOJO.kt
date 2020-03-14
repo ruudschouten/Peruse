@@ -2,6 +2,7 @@ package com.ruurd.peruse.data.pojo
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.ruurd.peruse.models.Chapter
 
 @Entity(tableName = "chapters")
 data class ChapterPOJO(
@@ -9,7 +10,7 @@ data class ChapterPOJO(
     var pages: Int,
     var duration: Long,
     var bookId: Long
-) {
+) : PojoToModel<Chapter> {
     constructor(
         title: String,
         pages: Int
@@ -23,4 +24,8 @@ data class ChapterPOJO(
 
     @PrimaryKey(autoGenerate = true)
     var chapterId: Long = 0
+
+    override fun toModel(): Chapter {
+        return Chapter(title, pages, duration)
+    }
 }
