@@ -17,8 +17,8 @@ interface SeriesDao {
     fun getById(id: Long): SeriesPOJO
 
     @Insert
-    fun insert(seriesPOJO: SeriesPOJO): Long
+    suspend fun insert(seriesPOJO: SeriesPOJO): Long
 
     @Insert
-    fun insert(vararg seriesPOJO: SeriesPOJO): List<Long>
+    suspend fun insert(vararg seriesPOJO: SeriesPOJO): List<Long>
 }

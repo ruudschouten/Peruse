@@ -7,12 +7,11 @@ import com.ruurd.peruse.data.pojo.FullBookPOJO
 
 @Dao
 interface BookDao {
-
-    // TODO: Look at Kotlin Flow instead of LiveData
     @Transaction
     @Query("SELECT * FROM books")
     fun getFullBooks(): LiveData<List<FullBookPOJO>>
 
+    @Transaction
     @Query("SELECT * FROM books WHERE bookId is :id ORDER BY bookId ASC LIMIT 1")
     fun getFull(id: Long): LiveData<FullBookPOJO>
 
@@ -23,14 +22,14 @@ interface BookDao {
     fun get(id: Long): LiveData<BookPOJO>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(bookPOJO: BookPOJO): Long
+    suspend fun insert(bookPOJO: BookPOJO): Long
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(vararg bookPOJO: BookPOJO): List<Long>
+    suspend fun insert(vararg bookPOJO: BookPOJO): List<Long>
 
     @Update
-    fun update(vararg bookPOJO: BookPOJO)
+    suspend fun update(vararg bookPOJO: BookPOJO)
 
     @Delete
-    fun delete(vararg bookPOJO: BookPOJO)
+    suspend fun delete(vararg bookPOJO: BookPOJO)
 }

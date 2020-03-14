@@ -18,8 +18,8 @@ interface AuthorDao {
     fun getById(id: Long): AuthorPOJO
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(authorPOJO: AuthorPOJO): Long
+    suspend fun insert(authorPOJO: AuthorPOJO): Long
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(vararg authorPOJO: AuthorPOJO): List<Long>
+    suspend fun insert(vararg authorPOJO: AuthorPOJO): List<Long>
 }

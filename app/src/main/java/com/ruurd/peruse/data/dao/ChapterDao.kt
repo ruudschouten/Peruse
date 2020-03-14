@@ -17,11 +17,11 @@ interface ChapterDao {
     fun get(id: Long) : ChapterPOJO
 
     @Insert
-    fun insert(chapterPOJO: ChapterPOJO): Long
+    suspend fun insert(chapterPOJO: ChapterPOJO): Long
 
     @Insert
-    fun insert(vararg chapterPOJO: ChapterPOJO): List<Long>
+    suspend fun insert(vararg chapterPOJO: ChapterPOJO): List<Long>
 
     @Insert
-    fun insertAll(chapters: List<ChapterPOJO>): List<Long>
+    suspend fun insertAll(chapters: List<ChapterPOJO>): List<Long>
 }
