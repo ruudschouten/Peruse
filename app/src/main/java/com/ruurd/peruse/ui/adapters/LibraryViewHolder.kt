@@ -4,20 +4,22 @@ import android.view.View
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.ruurd.peruse.data.pojo.FullBookPOJO
 import com.ruurd.peruse.models.Book
 import kotlinx.android.synthetic.main.recycler_library_book.view.*
 
 class LibraryViewHolder(v: View) : RecyclerView.ViewHolder(v) {
 
     var view: View = v
-    private var book: Book? = null
+    private lateinit var book: Book
 
-    fun bind(book: Book, navController: NavController) {
-        this.book = book
+    fun bind(pojo: FullBookPOJO, navController: NavController) {
+        book = pojo.toModel()
 
         view.library_book_title.text = book.title
         view.library_book_average_time.text = String.format("Average Time %.2f", book.averageTime())
-        view.library_book_chapter_count.text = String.format("Chapters read %s", book.chapters.size)
+        view.library_book_chapter_count.text = String.format("Chapters %s", book.chapters.size)
+        view.library_book_series.text = book.series?.name
 
         view.setOnClickListener {
             // TODO: Navigate to book activity/dialog
