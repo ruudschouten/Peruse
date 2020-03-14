@@ -1,33 +1,27 @@
 package com.ruurd.peruse.ui.fragments.viewmodels
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.ruurd.peruse.models.Author
+import androidx.lifecycle.viewModelScope
+import com.ruurd.peruse.data.pojo.FullBookPOJO
+import com.ruurd.peruse.data.repository.AppRepository
+import com.ruurd.peruse.data.repository.BookRepository
 import com.ruurd.peruse.models.Book
-import com.ruurd.peruse.models.Chapter
+import kotlinx.coroutines.launch
 
-class LibraryViewModel : ViewModel() {
+class LibraryViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val books: MutableLiveData<ArrayList<Book>>
+    private val bookRepository = BookRepository(application)
+    private val appRepository = AppRepository(application)
+    private val books = bookRepository.getFull()
+
+    val getBooks: LiveData<List<FullBookPOJO>>
         get() {
-            return loadBooks()
+            return books
         }
 
-    fun getBooks(): LiveData<ArrayList<Book>> {
-        return books
-    }
-
-    private fun loadBooks(): MutableLiveData<ArrayList<Book>> {
-        // Mocking :)
-        val book = Book(
-            "His Dark Materials",
-            mutableListOf(
-                Chapter("1", 21),
-                Chapter("2", 18)
-            ),
-            Author("Philip Pullman")
-        )
-        return MutableLiveData(arrayListOf(book))
+    fun insert(book: Book) = viewModelScope.launch {
+        appRepository.insert(book)
     }
 }
