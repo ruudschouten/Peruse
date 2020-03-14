@@ -1,23 +1,32 @@
 package com.ruurd.peruse.data.repository
 
-import com.ruurd.peruse.data.dao.SeriesDao
+import android.content.Context
+import com.ruurd.peruse.data.AppDatabase
 import com.ruurd.peruse.data.pojo.SeriesPOJO
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlin.coroutines.CoroutineContext
 
-class SeriesRepository(private val dao: SeriesDao) {
+class SeriesRepository(context: Context) : CoroutineScope {
 
-    fun insert(pojo: SeriesPOJO) {
-        dao.insert(pojo)
+    private val dao = AppDatabase.getInstance(context).seriesDao()
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Default
+
+    suspend fun insert(pojo: SeriesPOJO): Long {
+        return dao.insert(pojo)
     }
 
     fun get(): List<SeriesPOJO> {
         return dao.getSeries()
     }
 
-    fun get(name: String) : List<SeriesPOJO> {
+    fun get(name: String): List<SeriesPOJO> {
         return dao.getByName(name)
     }
 
-    fun insertOrGetByName(name: String): SeriesPOJO {
+    suspend fun insertOrGetByName(name: String): SeriesPOJO {
         // check if exists.
         if (dao.getByName(name).isNullOrEmpty()) {
             insert(SeriesPOJO(name))

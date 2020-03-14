@@ -1,13 +1,23 @@
 package com.ruurd.peruse.data.repository
 
+import android.content.Context
 import androidx.lifecycle.LiveData
-import com.ruurd.peruse.data.dao.BookDao
+import com.ruurd.peruse.data.AppDatabase
 import com.ruurd.peruse.data.pojo.BookPOJO
 import com.ruurd.peruse.data.pojo.FullBookPOJO
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class BookRepository(private val dao: BookDao) {
+class BookRepository(context: Context) : CoroutineScope {
 
-    fun insert(pojo: BookPOJO): Long {
+    private val dao = AppDatabase.getInstance(context).bookDao()
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Default
+
+    suspend fun insert(pojo: BookPOJO): Long {
         return dao.insert(pojo)
     }
 

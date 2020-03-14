@@ -1,23 +1,33 @@
 package com.ruurd.peruse.data.repository
 
-import com.ruurd.peruse.data.dao.ChapterDao
+import android.content.Context
+import com.ruurd.peruse.data.AppDatabase
 import com.ruurd.peruse.data.pojo.ChapterPOJO
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class ChapterRepository(private val dao: ChapterDao) {
+class ChapterRepository(context: Context) : CoroutineScope {
 
-    fun insert(pojo: ChapterPOJO) {
-        dao.insert(pojo)
+    private val dao = AppDatabase.getInstance(context).chapterDao()
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Default
+
+    suspend fun insert(pojo: ChapterPOJO): Long {
+        return dao.insert(pojo)
     }
 
-    fun insert(pojos: List<ChapterPOJO>) {
-        dao.insertAll(pojos)
+    suspend fun insert(pojos: List<ChapterPOJO>): List<Long> {
+        return dao.insertAll(pojos)
     }
 
     fun get(): List<ChapterPOJO> {
         return dao.getChapters()
     }
 
-    fun get(bookId: Long) : List<ChapterPOJO> {
+    fun get(bookId: Long): List<ChapterPOJO> {
         return dao.getChapters(bookId)
     }
 }

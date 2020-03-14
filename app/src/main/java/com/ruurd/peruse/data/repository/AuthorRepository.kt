@@ -1,11 +1,22 @@
 package com.ruurd.peruse.data.repository
 
+import android.content.Context
+import com.ruurd.peruse.data.AppDatabase
 import com.ruurd.peruse.data.dao.AuthorDao
 import com.ruurd.peruse.data.pojo.AuthorPOJO
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class AuthorRepository(private val dao: AuthorDao) {
+class AuthorRepository(context: Context) : CoroutineScope {
 
-    fun insert(pojo: AuthorPOJO) : Long {
+    private val dao = AppDatabase.getInstance(context).authorDao()
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Default
+
+    suspend fun insert(pojo: AuthorPOJO): Long {
         return dao.insert(pojo)
     }
 
@@ -21,9 +32,9 @@ class AuthorRepository(private val dao: AuthorDao) {
         return dao.getByName(name)
     }
 
-    fun insertOrGetByName(name: String): AuthorPOJO {
+    suspend fun insertOrGetByName(name: String): AuthorPOJO {
         // Check if exists.
-        if (dao.getByName(name).isNullOrEmpty()) {
+        if (get(name).isNullOrEmpty()) {
             insert(AuthorPOJO(name))
         }
         return get(name).first()
