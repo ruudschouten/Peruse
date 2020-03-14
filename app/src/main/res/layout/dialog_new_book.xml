@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="280dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/dialog_book_header_container"
@@ -11,7 +11,7 @@
         android:layout_height="64dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/dialog_book_title"
+        app:layout_constraintBottom_toTopOf="@+id/dialog_book_basic_container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Add New Book"
+            android:text="@string/dialog_book_new_header"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,91 +29,98 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <EditText
-        android:id="@+id/dialog_book_title"
-        style="@style/TextAppearance.MdcTypographyStyles.Body1"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/dialog_book_basic_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:hint="Book Title"
-        android:importantForAutofill="no"
-        android:inputType="textCapWords"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_book_header_container" />
+        app:layout_constraintTop_toBottomOf="@+id/dialog_book_header_container">
+
+        <EditText
+            android:id="@+id/dialog_book_title"
+            style="@style/TextAppearance.MdcTypographyStyles.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/dialog_book_title"
+            android:importantForAutofill="no"
+            android:inputType="textCapWords"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/dialog_book_author"
+            style="@style/TextAppearance.MdcTypographyStyles.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/dialog_book_author"
+            android:importantForAutofill="no"
+            android:inputType="textCapWords"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_book_title" />
+
+        <CheckBox
+            android:id="@+id/dialog_book_series_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/dialog_book_series_checkbox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_book_author" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
+        android:id="@+id/dialog_book_series_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_book_title">
+        app:layout_constraintTop_toBottomOf="@+id/dialog_book_basic_container">
 
-        <TextView
-            android:id="@+id/dialog_book_author_label"
+        <EditText
+            android:id="@+id/dialog_book_series"
             style="@style/TextAppearance.MdcTypographyStyles.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Author"
-            app:layout_constraintEnd_toStartOf="@+id/dialog_book_author_spinner"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Spinner
-            android:id="@+id/dialog_book_author_spinner"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/dialog_book_series"
+            android:importantForAutofill="no"
+            android:inputType="textCapWords"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/dialog_book_author_label" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/dialog_book_series_entry"
+            style="@style/TextAppearance.MdcTypographyStyles.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/dialog_book_series_entry"
+            android:inputType="numberDecimal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_book_series"
+            android:importantForAutofill="no" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-        <TextView
-            android:id="@+id/dialog_book_series_label"
-            style="@style/TextAppearance.MdcTypographyStyles.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Series"
-            app:layout_constraintEnd_toStartOf="@+id/dialog_book_series_spinner"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Spinner
-            android:id="@+id/dialog_book_series_spinner"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/dialog_book_series_label" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+        app:layout_constraintTop_toBottomOf="@+id/dialog_book_series_container">
 
         <Button
             android:id="@+id/dialog_book_btn_cancel"
@@ -123,7 +130,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Discard"
+            android:text="@string/dialog_option_discard"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/dialog_book_btn_add"
             app:layout_constraintStart_toStartOf="parent"
@@ -137,7 +144,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Add"
+            android:text="@string/dialog_option_add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/dialog_book_btn_cancel"
