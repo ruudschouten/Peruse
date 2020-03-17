@@ -19,7 +19,7 @@ abstract class SwipeCallback : ItemTouchHelper.Callback() {
     ): Int {
         return makeMovementFlags(0, ItemTouchHelper.LEFT)
     }
-    
+
     override fun onMove(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder,
