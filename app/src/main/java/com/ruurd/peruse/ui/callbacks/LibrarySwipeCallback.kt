@@ -1,7 +1,10 @@
 package com.ruurd.peruse.ui.callbacks
 
+import android.graphics.Canvas
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.ruurd.peruse.R
 import com.ruurd.peruse.ui.adapters.LibraryRecyclerViewAdapter
 import com.ruurd.peruse.ui.fragments.viewmodels.LibraryViewModel
 
@@ -27,5 +30,25 @@ class LibrarySwipeCallback
             viewModel.insert(book.toModel())
         }
         snackbar.show()
+    }
+
+    override fun onChildDraw(
+        c: Canvas,
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        dX: Float,
+        dY: Float,
+        actionState: Int,
+        isCurrentlyActive: Boolean
+    ) {
+        if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+            SwipeBackgroundHelper.paintDrawCommandToStart(
+                c,
+                viewHolder.itemView,
+                R.drawable.ic_delete_24dp,
+                dX
+            )
+        }
+        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }
 }
