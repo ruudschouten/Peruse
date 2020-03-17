@@ -106,8 +106,8 @@ class AddBookDialogFragment : DialogFragment() {
                     getString(R.string.dialog_empty_fields_notice, "book"),
                     Snackbar.LENGTH_LONG
                 ).show()
+                return true
             }
-            return true
         }
         return false
     }
