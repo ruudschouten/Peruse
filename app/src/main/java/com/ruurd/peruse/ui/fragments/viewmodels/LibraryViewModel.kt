@@ -24,4 +24,8 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
     fun insert(book: Book) = viewModelScope.launch {
         appRepository.insert(book)
     }
+
+    fun remove(book: FullBookPOJO) {
+        bookRepository.remove(book)
+    }
 }

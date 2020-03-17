@@ -36,4 +36,10 @@ class BookRepository(context: Context) : CoroutineScope {
     fun getFull(id: Long): LiveData<FullBookPOJO> {
         return dao.getFull(id)
     }
+
+    fun remove(book: FullBookPOJO) {
+        launch {
+            dao.delete(book.book)
+        }
+    }
 }

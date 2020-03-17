@@ -18,6 +18,10 @@ class LibraryRecyclerViewAdapter(
         notifyDataSetChanged()
     }
 
+    fun getItem(position: Int): FullBookPOJO {
+        return books[position]
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LibraryViewHolder {
         val inflatedView = LayoutInflater.from(parent.context)
             .inflate(R.layout.recycler_library_book, parent, false)
