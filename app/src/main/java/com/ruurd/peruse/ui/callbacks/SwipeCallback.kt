@@ -1,6 +1,8 @@
 package com.ruurd.peruse.ui.callbacks
 
+import android.content.Context
 import android.graphics.*
+import android.graphics.Shader.TileMode
 import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.annotation.DrawableRes
@@ -33,6 +35,17 @@ abstract class SwipeCallback : ItemTouchHelper.Callback() {
         private const val THRESHOLD = 2.5
         private const val OFFSET_PX = 20
         private const val CIRCLE_ACCELERATION = 3f
+
+        private var shadowColor: Int = 0
+        private var topShadowHeight: Float = 0f
+        private var bottomShadowHeight: Float = 0f
+        private var sideShadowWidth: Float = 0f
+
+        var leftShadow: Paint? = null
+        var topShadow: Paint? = null
+        var bottomShadow: Paint? = null
+
+        private var initialized = false
 
         fun paintDrawCommandToStart(
             canvas: Canvas,
@@ -79,6 +92,7 @@ abstract class SwipeCallback : ItemTouchHelper.Callback() {
         ) {
             drawBackground(canvas, viewItem, dX, drawCommand)
             drawIcon(canvas, viewItem, dX, drawCommand.icon)
+            drawShadow(canvas, viewItem, dX)
         }
 
         private fun drawBackground(
@@ -131,14 +145,69 @@ abstract class SwipeCallback : ItemTouchHelper.Callback() {
             viewItem: View,
             iconWidth: Int,
             topMargin: Int,
-            dx: Float
+            dX: Float
         ): Rect {
-            val leftBound = viewItem.right + dx.toInt() + OFFSET_PX
-            val rightBound = viewItem.right + dx.toInt() + iconWidth + OFFSET_PX
+            val leftBound = viewItem.right + dX.toInt() + OFFSET_PX
+            val rightBound = viewItem.right + dX.toInt() + iconWidth + OFFSET_PX
             val topBound = viewItem.top + topMargin
             val bottomBound = viewItem.bottom - topMargin
 
             return Rect(leftBound, topBound, rightBound, bottomBound)
+        }
+
+        private fun drawShadow(canvas: Canvas, viewItem: View, dX: Float) {
+            initialize(viewItem.context)
+
+            val left = viewItem.left.toFloat()
+            val right = viewItem.right.toFloat()
+            val top = viewItem.top.toFloat()
+            val bottom = viewItem.bottom.toFloat()
+
+            topShadow?.let {
+                val matrix = Matrix()
+                matrix.setTranslate(0f, top)
+                it.shader.setLocalMatrix(matrix)
+                canvas.drawRect(left, top, right, top + topShadowHeight, it)
+            }
+
+            bottomShadow?.let {
+                val matrix = Matrix()
+                matrix.setTranslate(0f, bottom - bottomShadowHeight)
+                it.shader.setLocalMatrix(matrix)
+                canvas.drawRect(left, bottom - bottomShadowHeight, right, bottom, it)
+            }
+
+            leftShadow?.let {
+                val shadowLeft = right + dX
+                val matrix = Matrix()
+                matrix.setTranslate(shadowLeft, 0f)
+                it.shader.setLocalMatrix(matrix)
+                canvas.drawRect(shadowLeft, top, shadowLeft + sideShadowWidth, bottom, it)
+            }
+        }
+
+        private fun initialize(context: Context) {
+            if (initialized) {
+                return
+            }
+
+            shadowColor = ContextCompat.getColor(context, R.color.shadow)
+            topShadowHeight = context.resources.getDimension(R.dimen.spacing_shadow)
+            bottomShadowHeight = topShadowHeight / 2.5f
+            sideShadowWidth = topShadowHeight * 3f / 4f
+
+            topShadow = Paint().apply {
+                shader = LinearGradient(0f, 0f, 0f, topShadowHeight, shadowColor, 0, TileMode.CLAMP)
+            }
+            bottomShadow = Paint().apply {
+                shader =
+                    LinearGradient(0f, 0f, 0f, bottomShadowHeight, shadowColor, 0, TileMode.CLAMP)
+            }
+            leftShadow = Paint().apply {
+                shader = LinearGradient(0f, 0f, sideShadowWidth, 0f, shadowColor, 0, TileMode.CLAMP)
+            }
+
+            initialized = true
         }
 
         private class DrawCommand internal constructor(
