@@ -16,6 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.ruurd.peruse.R
 import com.ruurd.peruse.ui.adapters.LibraryRecyclerViewAdapter
+import com.ruurd.peruse.ui.callbacks.LibrarySwipeCallback
 import com.ruurd.peruse.ui.dialogs.AddBookDialogFragment
 import com.ruurd.peruse.ui.fragments.viewmodels.LibraryViewModel
 
@@ -53,37 +54,7 @@ class LibraryFragment : Fragment() {
     }
 
     private fun setSwipeListeners() {
-
-        val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
-                val book = libraryAdapter.getItem(position)
-
-                viewModel.remove(book)
-                recyclerView.adapter!!.notifyItemRemoved(position)
-
-                val snackbar = Snackbar.make(
-                    recyclerView,
-                    String.format("Removed %s", book.book.title),
-                    Snackbar.LENGTH_LONG
-                )
-                snackbar.setAction("UNDO") {
-                    viewModel.insert(book.toModel())
-                }
-                snackbar.show()
-            }
-        }
-
-        val itemTouchHelper = ItemTouchHelper(itemTouchCallback)
+        val itemTouchHelper = ItemTouchHelper(LibrarySwipeCallback(libraryAdapter, viewModel))
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 }
