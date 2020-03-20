@@ -30,4 +30,8 @@ class ChapterRepository(context: Context) : CoroutineScope {
     fun get(bookId: Long): List<ChapterPOJO> {
         return dao.getChapters(bookId)
     }
+
+    fun update(chapters: List<ChapterPOJO>) = launch {
+        dao.update(chapters)
+    }
 }

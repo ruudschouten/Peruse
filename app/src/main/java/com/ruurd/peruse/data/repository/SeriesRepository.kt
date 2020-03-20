@@ -5,6 +5,7 @@ import com.ruurd.peruse.data.AppDatabase
 import com.ruurd.peruse.data.pojo.SeriesPOJO
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 class SeriesRepository(context: Context) : CoroutineScope {
@@ -32,5 +33,9 @@ class SeriesRepository(context: Context) : CoroutineScope {
             insert(SeriesPOJO(name))
         }
         return get(name).first()
+    }
+
+    fun update(series: SeriesPOJO) = launch {
+        dao.update(series)
     }
 }

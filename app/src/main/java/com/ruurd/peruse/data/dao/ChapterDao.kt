@@ -3,6 +3,7 @@ package com.ruurd.peruse.data.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.ruurd.peruse.data.pojo.ChapterPOJO
 
 @Dao
@@ -24,4 +25,10 @@ interface ChapterDao {
 
     @Insert
     suspend fun insertAll(chapters: List<ChapterPOJO>): List<Long>
+
+    @Update
+    suspend fun update(vararg chapterPOJO: ChapterPOJO)
+
+    @Update
+    suspend fun update(chapters: List<ChapterPOJO>)
 }

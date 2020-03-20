@@ -21,6 +21,10 @@ class BookRepository(context: Context) : CoroutineScope {
         return dao.insert(pojo)
     }
 
+    suspend fun update(pojo: BookPOJO) {
+        dao.update(pojo)
+    }
+
     fun get(): LiveData<List<BookPOJO>> {
         return dao.getBooks()
     }

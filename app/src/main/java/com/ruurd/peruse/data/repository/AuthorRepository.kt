@@ -39,4 +39,8 @@ class AuthorRepository(context: Context) : CoroutineScope {
         }
         return get(name).first()
     }
+
+    fun update(pojo: AuthorPOJO) = launch {
+        dao.update(pojo)
+    }
 }

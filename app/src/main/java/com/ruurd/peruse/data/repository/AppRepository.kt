@@ -2,8 +2,10 @@ package com.ruurd.peruse.data.repository
 
 import android.content.Context
 import com.ruurd.peruse.data.AppDatabase
+import com.ruurd.peruse.data.pojo.ChapterPOJO
 import com.ruurd.peruse.models.Author
 import com.ruurd.peruse.models.Book
+import com.ruurd.peruse.models.Chapter
 import com.ruurd.peruse.models.Series
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -66,4 +68,32 @@ class AppRepository(context: Context) : CoroutineScope {
 
         return bookId
     }
+
+    fun fullUpdate(book: Book) = launch {
+        update(book)
+        update(book.chapters)
+        update(book.author)
+        if (book.isInSeries()) {
+            update(book.series!!)
+        }
+    }
+
+    fun update(book: Book) = launch {
+        bookRepository.update(book.toPojo())
+    }
+
+    fun update(chapters: List<Chapter>) = launch {
+        val pojos = mutableListOf<ChapterPOJO>()
+        chapters.forEach { pojos.add(it.toPojo()) }
+        chapterRepository.update(pojos)
+    }
+
+    fun update(author: Author) = launch {
+        authorRepository.update(author.toPojo())
+    }
+
+    fun update(series: Series) = launch {
+        seriesRepository.update(series.toPojo())
+    }
+
 }

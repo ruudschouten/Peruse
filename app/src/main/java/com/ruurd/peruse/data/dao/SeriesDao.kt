@@ -3,6 +3,7 @@ package com.ruurd.peruse.data.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.ruurd.peruse.data.pojo.SeriesPOJO
 
 @Dao
@@ -21,4 +22,7 @@ interface SeriesDao {
 
     @Insert
     suspend fun insert(vararg seriesPOJO: SeriesPOJO): List<Long>
+
+    @Update
+    suspend fun update(vararg seriesPOJO: SeriesPOJO)
 }

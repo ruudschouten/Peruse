@@ -1,9 +1,6 @@
 package com.ruurd.peruse.data.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.ruurd.peruse.data.pojo.AuthorPOJO
 
 @Dao
@@ -22,4 +19,7 @@ interface AuthorDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(vararg authorPOJO: AuthorPOJO): List<Long>
+
+    @Update
+    suspend fun update(vararg authorPOJO: AuthorPOJO)
 }
