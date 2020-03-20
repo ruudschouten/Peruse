@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/library_book_title"
+        android:id="@+id/library_book_recycler_title"
         style="@style/TextAppearance.MdcTypographyStyles.Subtitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,17 +15,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/library_book_series"
+        android:id="@+id/library_book_recycler_series"
         style="@style/TextAppearance.MdcTypographyStyles.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_views"
         android:textColor="@color/font_secondary_color"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/library_book_title" />
+        app:layout_constraintTop_toBottomOf="@+id/library_book_recycler_title" />
 
     <TextView
-        android:id="@+id/library_book_chapter_count"
+        android:id="@+id/library_book_recycler_chapter_count"
         style="@style/TextAppearance.MdcTypographyStyles.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/library_book_average_time"
+        android:id="@+id/library_book_recycler_average_time"
         style="@style/TextAppearance.MdcTypographyStyles.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,6 +45,6 @@
         android:paddingBottom="@dimen/spacing_views"
         android:textColor="#5A5A5A"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/library_book_chapter_count" />
+        app:layout_constraintTop_toBottomOf="@+id/library_book_recycler_chapter_count" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

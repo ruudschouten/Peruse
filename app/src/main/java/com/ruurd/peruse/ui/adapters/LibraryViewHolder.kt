@@ -16,10 +16,10 @@ class LibraryViewHolder(v: View) : RecyclerView.ViewHolder(v) {
     fun bind(pojo: FullBookPOJO, navController: NavController) {
         book = pojo.toModel()
 
-        view.library_book_title.text = book.title
-        view.library_book_average_time.text = String.format("Average Time %.2f", book.averageTime())
-        view.library_book_chapter_count.text = String.format("Chapters %s", book.chapters.size)
-        view.library_book_series.text = book.series?.name
+        view.library_book_recycler_title.text = book.title
+        view.library_book_recycler_average_time.text = String.format("Average Time %.2f", book.averageTime())
+        view.library_book_recycler_chapter_count.text = String.format("Chapters %s", book.chapters.size)
+        view.library_book_recycler_series.text = book.series?.name
 
         view.setOnClickListener {
             // TODO: Navigate to book activity/dialog
