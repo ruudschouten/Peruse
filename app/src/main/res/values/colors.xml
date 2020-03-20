@@ -6,5 +6,5 @@
     <color name="white">#FFFFFF</color>
     <color name="shadow">#4c000000</color>
     <color name="colorDelete">#EF5350</color>
-    <color name="colorDeleteFaded">#989898</color>
+    <color name="colorDeleteFaded">#EF7B78</color>
 </resources>
