@@ -35,7 +35,7 @@ class LibraryFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_library, container, false)
         val navController = findNavController()
 
-        recyclerView = root.findViewById(R.id.library_list)
+        recyclerView = root.findViewById(R.id.fragment_library_list)
         libraryAdapter = LibraryRecyclerViewAdapter(mutableListOf(), navController)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = libraryAdapter
@@ -46,7 +46,7 @@ class LibraryFragment : Fragment() {
 
         setSwipeListeners()
 
-        val addBookFab: FloatingActionButton = root.findViewById(R.id.fab_add_book)
+        val addBookFab: FloatingActionButton = root.findViewById(R.id.fragment_library_fab_add_book)
         addBookFab.setOnClickListener {
             AddBookDialogFragment().show(parentFragmentManager, "new_book")
         }

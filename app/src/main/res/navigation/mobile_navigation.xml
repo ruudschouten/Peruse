@@ -14,8 +14,8 @@
     <fragment
         android:id="@+id/navigation_writers"
         android:name="com.ruurd.peruse.ui.fragments.WritersFragment"
-        android:label="@string/title_writers"
-        tools:layout="@layout/fragment_writers" />
+        android:label="@string/title_authors"
+        tools:layout="@layout/fragment_authors" />
 
     <fragment
         android:id="@+id/navigation_series"

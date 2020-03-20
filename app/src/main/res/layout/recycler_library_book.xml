@@ -2,17 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/library_book_title"
         style="@style/TextAppearance.MdcTypographyStyles.Subtitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="@dimen/spacing_views"
+        android:layout_marginTop="@dimen/spacing_views"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,7 +19,7 @@
         style="@style/TextAppearance.MdcTypographyStyles.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="@dimen/spacing_views"
         android:textColor="#757575"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/library_book_title" />
@@ -31,8 +29,8 @@
         style="@style/TextAppearance.MdcTypographyStyles.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="@dimen/spacing_views"
+        android:layout_marginEnd="@dimen/spacing_views"
         android:textColor="#5A5A5A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,9 +40,9 @@
         style="@style/TextAppearance.MdcTypographyStyles.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:paddingBottom="8dp"
+        android:layout_marginTop="@dimen/spacing_views"
+        android:layout_marginEnd="@dimen/spacing_views"
+        android:paddingBottom="@dimen/spacing_views"
         android:textColor="#5A5A5A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/library_book_chapter_count" />

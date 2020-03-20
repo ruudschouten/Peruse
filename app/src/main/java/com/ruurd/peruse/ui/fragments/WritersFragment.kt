@@ -21,7 +21,7 @@ class WritersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         writersViewModel = ViewModelProvider(this).get(WritersViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_writers, container, false)
+        val root = inflater.inflate(R.layout.fragment_authors, container, false)
         val textView: TextView = root.findViewById(R.id.text_writers)
         writersViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it

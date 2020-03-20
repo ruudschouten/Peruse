@@ -4,7 +4,7 @@
     <item
         android:id="@+id/navigation_writers"
         android:icon="@drawable/ic_people_24dp"
-        android:title="@string/title_writers" />
+        android:title="@string/title_authors" />
 
     <item
         android:id="@+id/navigation_library"

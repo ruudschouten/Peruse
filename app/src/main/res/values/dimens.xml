@@ -3,4 +3,9 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="spacing_shadow">4dp</dimen>
+    <dimen name="spacing_views">8dp</dimen>
+    <dimen name="spacing_fab">16dp</dimen>
+    <dimen name="dialog_padding">24dp</dimen>
+    <dimen name="dialog_header_height">64dp</dimen>
+    <dimen name="dialog_width">280dp</dimen>
 </resources>

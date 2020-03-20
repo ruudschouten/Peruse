@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="280dp"
+    android:layout_width="@dimen/dialog_width"
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/dialog_book_header_container"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_height="@dimen/dialog_header_height"
+        android:layout_marginStart="@dimen/dialog_padding"
+        android:layout_marginEnd="@dimen/dialog_padding"
         app:layout_constraintBottom_toTopOf="@+id/dialog_book_basic_container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -33,8 +33,8 @@
         android:id="@+id/dialog_book_basic_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="@dimen/dialog_padding"
+        android:layout_marginEnd="@dimen/dialog_padding"
         app:layout_constraintTop_toBottomOf="@+id/dialog_book_header_container">
 
         <EditText
@@ -42,7 +42,7 @@
             style="@style/TextAppearance.MdcTypographyStyles.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/dialog_book_title"
+            android:hint="@string/title"
             android:importantForAutofill="no"
             android:inputType="textCapWords"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,8 +54,8 @@
             style="@style/TextAppearance.MdcTypographyStyles.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="@string/dialog_book_author"
+            android:layout_marginTop="@dimen/spacing_views"
+            android:hint="@string/author"
             android:importantForAutofill="no"
             android:inputType="textCapWords"
             app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +66,7 @@
             android:id="@+id/dialog_book_series_checkbox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/spacing_views"
             android:text="@string/dialog_book_series_checkbox"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -78,9 +78,9 @@
         android:id="@+id/dialog_book_series_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dialog_padding"
+        android:layout_marginEnd="@dimen/dialog_padding"
         android:visibility="gone"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialog_book_basic_container">
@@ -90,8 +90,8 @@
             style="@style/TextAppearance.MdcTypographyStyles.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="@string/dialog_book_series"
+            android:layout_marginTop="@dimen/spacing_views"
+            android:hint="@string/series"
             android:importantForAutofill="no"
             android:inputType="textCapWords"
             app:layout_constraintEnd_toEndOf="parent"
@@ -103,13 +103,13 @@
             style="@style/TextAppearance.MdcTypographyStyles.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="@string/dialog_book_series_entry"
+            android:layout_marginTop="@dimen/spacing_views"
+            android:hint="@string/series_entry"
+            android:importantForAutofill="no"
             android:inputType="numberDecimal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_book_series"
-            android:importantForAutofill="no" />
+            app:layout_constraintTop_toBottomOf="@+id/dialog_book_series" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -117,8 +117,8 @@
         android:id="@+id/constraintLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="@dimen/spacing_views"
+        android:layout_marginEnd="@dimen/spacing_views"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialog_book_series_container">
 
@@ -127,9 +127,9 @@
             style="@style/ButtonAppearance.DialogStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="@dimen/spacing_views"
+            android:layout_marginTop="@dimen/spacing_views"
+            android:layout_marginBottom="@dimen/spacing_views"
             android:text="@string/dialog_option_discard"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/dialog_book_btn_add"
@@ -141,9 +141,9 @@
             style="@style/ButtonAppearance.DialogStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="@dimen/spacing_views"
+            android:layout_marginTop="@dimen/spacing_views"
+            android:layout_marginBottom="@dimen/spacing_views"
             android:text="@string/dialog_option_add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
