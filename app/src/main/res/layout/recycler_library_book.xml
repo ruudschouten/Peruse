@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_views"
         android:layout_marginEnd="@dimen/spacing_views"
-        android:textColor="#5A5A5A"
+        android:textColor="@color/font_secondary_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
