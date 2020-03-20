@@ -4,6 +4,10 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="spacing_shadow">4dp</dimen>
     <dimen name="spacing_views">8dp</dimen>
+    <dimen name="spacing_views_small">4dp</dimen>
+    <dimen name="spacing_views_large">12dp</dimen>
+    <dimen name="spacing_views_very_large">16dp</dimen>
+    <dimen name="spacing_views_extremely_large">24dp</dimen>
     <dimen name="spacing_fab">16dp</dimen>
     <dimen name="dialog_padding">24dp</dimen>
     <dimen name="dialog_header_height">64dp</dimen>

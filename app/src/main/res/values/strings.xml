@@ -6,8 +6,10 @@
     <string name="title">Title</string>
     <string name="author">Author</string>
     <string name="series">Series</string>
+    <string name="chapters">Chapters</string>
     <string name="series_entry">Series Entry</string>
     <string name="series_with_entry">%1$s #%2$s</string>
+    <string name="book_written_by_author">by %1$s</string>
     <string name="dialog_book_new_header">Add New Book</string>
     <string name="dialog_book_series_checkbox">Is part of a series?</string>
     <string name="dialog_option_discard">Discard</string>
