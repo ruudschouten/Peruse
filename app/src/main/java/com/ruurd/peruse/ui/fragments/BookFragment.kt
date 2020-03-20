@@ -6,11 +6,13 @@ import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ruurd.peruse.R
@@ -18,7 +20,7 @@ import com.ruurd.peruse.data.pojo.FullBookPOJO
 import com.ruurd.peruse.ui.adapters.BookChapterRecyclerViewAdapter
 import com.ruurd.peruse.ui.fragments.viewmodels.BookViewModel
 
-class BookFragment(var book: FullBookPOJO) : Fragment() {
+class BookFragment : Fragment() {
 
     private lateinit var titleView: TextView
     private lateinit var seriesView: TextView
@@ -30,6 +32,10 @@ class BookFragment(var book: FullBookPOJO) : Fragment() {
 
     private lateinit var root: View
     private lateinit var navController: NavController
+
+    private lateinit var book: FullBookPOJO
+
+    private val args: BookFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +49,12 @@ class BookFragment(var book: FullBookPOJO) : Fragment() {
         setupViewValues()
         setupRecyclerView()
 
+        viewModel.getBook(args.bookId).observe(viewLifecycleOwner, Observer { book ->
+            this.book = book
+            setViewValues()
+            chapterAdapter.setChapters(book.chapters)
+        })
+
         return root
     }
 
@@ -50,27 +62,19 @@ class BookFragment(var book: FullBookPOJO) : Fragment() {
         titleView = root.findViewById(R.id.fragment_book_title)
         seriesView = root.findViewById(R.id.fragment_book_series)
         authorView = root.findViewById(R.id.fragment_book_author)
-
-        setViewValues()
     }
 
     private fun setupRecyclerView() {
         chapterRecyclerView = root.findViewById(R.id.fragment_book_chapter_list)
-        chapterAdapter = BookChapterRecyclerViewAdapter(book.chapters, navController)
+        chapterAdapter = BookChapterRecyclerViewAdapter(mutableListOf(), navController)
         chapterRecyclerView.layoutManager = LinearLayoutManager(activity)
         chapterRecyclerView.adapter = chapterAdapter
-
-        viewModel.getBook(book.book.bookId).observe(viewLifecycleOwner, Observer { book ->
-            this.book = book
-            setViewValues()
-            chapterAdapter.setChapters(book.chapters)
-        })
     }
 
     private fun setViewValues() {
         val model = book.toModel()
         titleView.text = model.title
-        authorView.text = model.author.name
+        authorView.text = getString(R.string.book_written_by_author, model.author.name)
 
         if (model.isInSeries()) {
             seriesView.text = getString(

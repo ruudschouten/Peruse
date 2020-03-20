@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.ruurd.peruse.data.pojo.FullBookPOJO
 import com.ruurd.peruse.models.Book
+import com.ruurd.peruse.ui.fragments.LibraryFragmentDirections
 import kotlinx.android.synthetic.main.recycler_library_book.view.*
 
 class LibraryViewHolder(v: View) : RecyclerView.ViewHolder(v) {
@@ -22,8 +23,9 @@ class LibraryViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         view.library_book_recycler_series.text = book.series?.name
 
         view.setOnClickListener {
-            // TODO: Navigate to book activity/dialog
-            Snackbar.make(view, String.format("Clicked %s!", book.title), 1000).show()
+            navController.navigate(
+                LibraryFragmentDirections.actionNavigationLibraryToBookFragment(pojo.book.bookId)
+            )
         }
     }
 }
