@@ -1,5 +1,7 @@
 plugins {
     id("com.android.application")
+    id("androidx.navigation.safeargs")
+
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
@@ -53,8 +55,10 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.2.0")
 
-    implementation("androidx.navigation:navigation-fragment-ktx:2.2.1")
-    implementation("androidx.navigation:navigation-ui-ktx:2.2.1")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.0-alpha04")
+    implementation("androidx.navigation:navigation-ui-ktx:2.3.0-alpha04")
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:2.3.0-alpha04")
+
     implementation("androidx.room:room-runtime:2.2.4")
     kapt("androidx.room:room-compiler:2.2.4")
     implementation("androidx.room:room-ktx:2.2.4")
