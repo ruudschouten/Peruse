@@ -15,4 +15,5 @@
     <string name="dialog_option_discard">Discard</string>
     <string name="dialog_option_add">Add</string>
     <string name="dialog_empty_fields_notice">Please fill in all fields in order to create a new %1$s.</string>
+    <string name="time_format">%1$sm %2$ss</string>
 </resources>
