@@ -63,8 +63,6 @@ dependencies {
     kapt("androidx.room:room-compiler:2.2.4")
     implementation("androidx.room:room-ktx:2.2.4")
 
-    implementation("com.github.happysingh23828:HappyTimer:1.0.0")
-
     testImplementation("junit:junit:4.12")
     androidTestImplementation("androidx.test.ext:junit:1.1.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
