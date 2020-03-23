@@ -114,7 +114,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/dialog_reading_finished_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_views"
@@ -123,7 +123,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dialog_book_series_container">
 
         <Button
-            android:id="@+id/dialog_book_btn_cancel"
+            android:id="@+id/dialog_reading_discard_button"
             style="@style/ButtonAppearance.DialogStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -132,12 +132,12 @@
             android:layout_marginBottom="@dimen/spacing_views"
             android:text="@string/dialog_option_discard"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/dialog_book_btn_add"
+            app:layout_constraintEnd_toStartOf="@+id/dialog_reading_add_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/dialog_book_btn_add"
+            android:id="@+id/dialog_reading_add_button"
             style="@style/ButtonAppearance.DialogStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
             android:text="@string/dialog_option_add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/dialog_book_btn_cancel"
+            app:layout_constraintStart_toEndOf="@id/dialog_reading_discard_button"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

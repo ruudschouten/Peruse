@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/spacing_views_small"
+    android:layout_marginBottom="@dimen/spacing_views_small"
+    android:layout_marginStart="@dimen/spacing_views"
+    android:layout_marginEnd="@dimen/spacing_views">
+
+    <EditText
+        android:id="@+id/chapter_reading_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/dialog_reading_chapter_title"
+        android:importantForAutofill="no"
+        android:inputType="textCapWords"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        style="@style/TextAppearance.MdcTypographyStyles.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_views_large"
+        android:text="@string/dialog_reading_chapter_pages"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dialog_book_pages_start"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/dialog_book_pages_start"
+        style="@style/TextAppearance.MdcTypographyStyles.Body1"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="@string/dialog_reading_chapter_start"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dialog_book_pages_end" />
+
+    <EditText
+        android:id="@+id/dialog_book_pages_end"
+        style="@style/TextAppearance.MdcTypographyStyles.Body1"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="@string/dialog_reading_chapter_end"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_book_pages_start" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

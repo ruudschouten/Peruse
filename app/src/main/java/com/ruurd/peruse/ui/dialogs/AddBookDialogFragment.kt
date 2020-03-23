@@ -42,8 +42,8 @@ class AddBookDialogFragment : DialogFragment() {
             root.findViewById<ConstraintLayout>(R.id.dialog_book_series_container)
         bookSeriesTextEdit = root.findViewById(R.id.dialog_book_series)
         bookSeriesEntryTextEdit = root.findViewById(R.id.dialog_book_series_entry)
-        val cancelButton = root.findViewById<Button>(R.id.dialog_book_btn_cancel)
-        val addButton = root.findViewById<Button>(R.id.dialog_book_btn_add)
+        val cancelButton = root.findViewById<Button>(R.id.dialog_reading_discard_button)
+        val addButton = root.findViewById<Button>(R.id.dialog_reading_add_button)
 
         // Setting events.
         bookSeriesCheckbox.setOnCheckedChangeListener { _, isChecked ->
