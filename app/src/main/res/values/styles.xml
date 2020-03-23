@@ -7,55 +7,65 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="TextAppearance.MdcTypographyStyles.Header1" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="fontFamily">@font/work_sans</item>
         <item name="android:fontFamily">@font/work_sans</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">@dimen/text_size_extremely_large</item>
     </style>
+
     <style name="TextAppearance.MdcTypographyStyles.Header2" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="fontFamily">@font/work_sans</item>
         <item name="android:fontFamily">@font/work_sans</item>
-        <item name="android:textSize">21sp</item>
+        <item name="android:textSize">@dimen/text_size_very_large</item>
     </style>
+
     <style name="TextAppearance.MdcTypographyStyles.Header3" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="fontFamily">@font/work_sans</item>
         <item name="android:fontFamily">@font/work_sans</item>
-        <item name="android:textSize">19sp</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
     </style>
+
     <style name="TextAppearance.MdcTypographyStyles.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
         <item name="fontFamily">@font/work_sans</item>
         <item name="android:fontFamily">@font/work_sans</item>
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
+
     <style name="TextAppearance.MdcTypographyStyles.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
         <item name="fontFamily">@font/work_sans</item>
         <item name="android:fontFamily">@font/work_sans</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/text_size_regular</item>
     </style>
+
     <style name="TextAppearance.MdcTypographyStyles.Body1" parent="TextAppearance.MaterialComponents.Body1">
         <item name="fontFamily">@font/fira_sans</item>
         <item name="android:fontFamily">@font/fira_sans</item>
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
+
     <style name="TextAppearance.MdcTypographyStyles.Body2" parent="TextAppearance.MaterialComponents.Body2">
         <item name="fontFamily">@font/fira_sans</item>
         <item name="android:fontFamily">@font/fira_sans</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/text_size_regular</item>
     </style>
+
     <style name="TextAppearance.MdcTypographyStyles.Button" parent="TextAppearance.MaterialComponents.Button">
         <item name="fontFamily">@font/fira_sans</item>
         <item name="android:fontFamily">@font/fira_sans</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/text_size_regular</item>
     </style>
+
     <style name="TextAppearance.MdcTypographyStyles.Caption" parent="TextAppearance.MaterialComponents.Caption">
         <item name="fontFamily">@font/fira_sans</item>
         <item name="android:fontFamily">@font/fira_sans</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
     </style>
+
     <style name="TextAppearance.MdcTypographyStyles.Overline" parent="TextAppearance.MaterialComponents.Overline">
         <item name="fontFamily">@font/fira_sans</item>
         <item name="android:fontFamily">@font/fira_sans</item>
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">@dimen/text_size_tiny</item>
     </style>
 
     <style name="ButtonAppearance.DialogStyle" parent="Widget.AppCompat.Button.Borderless">
