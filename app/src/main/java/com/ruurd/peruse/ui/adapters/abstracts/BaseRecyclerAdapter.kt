@@ -11,6 +11,7 @@ abstract class BaseRecyclerAdapter<T, TViewHolder : RecyclerView.ViewHolder>(
 
     override fun set(entries: List<T>) {
         this.entries = entries
+        notifyDataSetChanged()
     }
 
     override fun get(): List<T> = this.entries
