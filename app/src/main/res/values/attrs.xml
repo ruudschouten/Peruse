@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TimerView">
+        <attr name="label_text_size" format="dimension"/>
+        <attr name="time_text_size" format="dimension"/>
+    </declare-styleable>
+</resources>
