@@ -24,17 +24,28 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
 
     private lateinit var root: View
 
+    // region Views
+    private lateinit var header: TextView
+
+    private lateinit var timerContainer: ConstraintLayout
     private lateinit var timer: TimerView
+    private lateinit var timerButtonContainer: ConstraintLayout
     private lateinit var timerToggleButton: ImageButton
     private lateinit var timerStopButton: ImageButton
+    private lateinit var startButtonsContainer: ConstraintLayout
+    private lateinit var startReadingButton: Button
+    private lateinit var cancelReadingButton: Button
+
+    private lateinit var doneReadingContainer: ConstraintLayout
+    private lateinit var chaptersRead: EditText
+    private lateinit var chaptersRecycler: RecyclerView
+    private lateinit var discardButton: Button
+    private lateinit var addButton: Button
+
+    // endregion
 
     private lateinit var pauseDrawable: Drawable
     private lateinit var playDrawable: Drawable
-
-    private fun setupDrawables() {
-        pauseDrawable = ContextCompat.getDrawable(context!!, R.drawable.ic_pause_24dp)!!
-        playDrawable = ContextCompat.getDrawable(context!!, R.drawable.ic_play_arrow_24dp)!!
-    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         if (context == null) {
@@ -47,36 +58,55 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
         val inflater = requireActivity().layoutInflater
         root = inflater.inflate(R.layout.dialog_reading_book, null)
 
-        // General views
-        val header = root.findViewById<TextView>(R.id.dialog_reading_header)
+        setupGeneralViews()
+        setupTimerViews()
+        setupFinishedViews()
 
-        // Timer views
-        val timerContainer = root.findViewById<ConstraintLayout>(R.id.dialog_reading_timer_container)
+        setupGeneralValues()
+        setupTimerValues()
+        setupFinishedValues()
+
+        isCancelable = false
+        builder.setView(root)
+        return builder.create()
+    }
+
+    private fun setupDrawables() {
+        pauseDrawable = ContextCompat.getDrawable(context!!, R.drawable.ic_pause_24dp)!!
+        playDrawable = ContextCompat.getDrawable(context!!, R.drawable.ic_play_arrow_24dp)!!
+    }
+
+    private fun setupGeneralViews() {
+        header = root.findViewById(R.id.dialog_reading_header)
+    }
+
+    private fun setupTimerViews() {
+        timerContainer = root.findViewById(R.id.dialog_reading_timer_container)
         timer = root.findViewById(R.id.dialog_reading_timer)
 
-        val timerButtonContainer =
-            root.findViewById<ConstraintLayout>(R.id.dialog_reading_timer_buttons)
+        timerButtonContainer = root.findViewById(R.id.dialog_reading_timer_buttons)
         timerToggleButton = root.findViewById(R.id.dialog_reading_timer_toggle_play_button)
         timerStopButton = root.findViewById(R.id.dialog_reading_timer_stop_button)
 
-        val startButtonsContainer =
-            root.findViewById<ConstraintLayout>(R.id.dialog_reading_start_button_container)
-        val startReadingButton = root.findViewById<Button>(R.id.dialog_reading_start_button)
-        val cancelReadingButton = root.findViewById<Button>(R.id.dialog_reading_cancel_button)
+        startButtonsContainer = root.findViewById(R.id.dialog_reading_start_button_container)
+        startReadingButton = root.findViewById(R.id.dialog_reading_start_button)
+        cancelReadingButton = root.findViewById(R.id.dialog_reading_cancel_button)
+    }
 
-        // Done reading views
-        val doneReadingContainer = root.findViewById<ConstraintLayout>(R.id.dialog_reading_finished_container)
-        var chaptersRead = root.findViewById<EditText>(R.id.dialog_reading_chapter_amount)
-        var chaptersRecycler = root.findViewById<RecyclerView>(R.id.dialog_reading_chapters)
+    private fun setupFinishedViews() {
+        doneReadingContainer = root.findViewById(R.id.dialog_reading_finished_container)
+        chaptersRead = root.findViewById(R.id.dialog_reading_chapter_amount)
+        chaptersRecycler = root.findViewById(R.id.dialog_reading_chapters)
+
         //TODO: Chapters RecyclerAdapter
-        val discardButton = root.findViewById<Button>(R.id.dialog_reading_discard_button)
-        val addButton = root.findViewById<Button>(R.id.dialog_reading_add_button)
 
-        // Set up values
+        discardButton = root.findViewById(R.id.dialog_reading_discard_button)
+        addButton = root.findViewById(R.id.dialog_reading_add_button)
+    }
+
+    private fun setupGeneralValues() {
         header.text = getString(R.string.dialog_reading_header, book.book.title)
-        //TODO: Animate `...` after the Header
 
-        // Before timer started view
         startReadingButton.setOnClickListener {
             startButtonsContainer.visibility = GONE
             timerButtonContainer.visibility = VISIBLE
@@ -87,8 +117,9 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
         cancelReadingButton.setOnClickListener {
             dialog?.cancel()
         }
+    }
 
-        // Timer view
+    private fun setupTimerValues() {
         timerToggleButton.setOnClickListener {
             if (timer.getState() == State.RUNNING) {
                 timer.pause()
@@ -104,8 +135,9 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
             timerContainer.visibility = GONE
             doneReadingContainer.visibility = VISIBLE
         }
+    }
 
-        // Done reading view
+    private fun setupFinishedValues() {
         discardButton.setOnClickListener {
             timer.onDestroy()
             dialog?.cancel()
@@ -114,10 +146,6 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
         addButton.setOnClickListener {
             timer.onDestroy()
         }
-
-        isCancelable = false
-        builder.setView(root)
-        return builder.create()
     }
 
     private fun setToggleDrawable() {
