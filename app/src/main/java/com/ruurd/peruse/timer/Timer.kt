@@ -54,4 +54,6 @@ class Timer : ITimer {
         this.state = state
         onStateChangeListener?.onStateChange(state, currentTime)
     }
+
+    fun getState() = this.state
 }
