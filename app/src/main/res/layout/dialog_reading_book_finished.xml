@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/dialog_reading_finished"
+    android:id="@+id/dialog_reading_finished_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacing_views"
     android:visibility="gone"
     app:layout_constraintTop_toTopOf="parent"
     tools:showIn="@layout/dialog_reading_book">
@@ -69,7 +70,8 @@
 
         <Button
             android:id="@+id/dialog_reading_add_button"
-            style="@style/ButtonAppearance.DialogStyle"
+            style="@style/ButtonAppearance.DisabledDialogStyle"
+            android:enabled="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_views"
