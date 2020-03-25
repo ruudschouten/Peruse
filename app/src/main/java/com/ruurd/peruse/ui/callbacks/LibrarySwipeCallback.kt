@@ -16,7 +16,7 @@ class LibrarySwipeCallback
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         val position = viewHolder.adapterPosition
-        val book = adapter.getItem(position)
+        val book = adapter.getAt(position)
 
         viewModel.remove(book)
         adapter.notifyItemRemoved(position)

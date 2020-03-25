@@ -39,7 +39,7 @@ class AppRepository(context: Context) : CoroutineScope {
 
     fun insert(book: Book): Long {
         // Create a POJO from book.
-        val bookPojo = book.toPojo()
+        val bookPojo = book.toSimplePojo()
         var bookId = 0L
 
         launch {
@@ -79,7 +79,7 @@ class AppRepository(context: Context) : CoroutineScope {
     }
 
     fun update(book: Book) = launch {
-        bookRepository.update(book.toPojo())
+        bookRepository.update(book.toSimplePojo())
     }
 
     fun update(chapters: List<Chapter>) = launch {

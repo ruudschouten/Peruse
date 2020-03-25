@@ -53,7 +53,7 @@ class BookFragment : Fragment() {
         viewModel.getBook(args.bookId).observe(viewLifecycleOwner, Observer { book ->
             this.book = book
             setViewValues()
-            chapterAdapter.setChapters(book.chapters)
+            chapterAdapter.set(book.chapters)
         })
 
         val fab = root.findViewById<FloatingActionButton>(R.id.fragment_book_start_reading_fab)

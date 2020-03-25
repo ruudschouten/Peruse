@@ -1,6 +1,8 @@
 package com.ruurd.peruse.models
 
 import com.ruurd.peruse.data.pojo.BookPOJO
+import com.ruurd.peruse.data.pojo.ChapterPOJO
+import com.ruurd.peruse.data.pojo.FullBookPOJO
 
 data class Book(
     val title: String,
@@ -8,7 +10,7 @@ data class Book(
     val author: Author,
     val series: Series?,
     val seriesEntry: Float
-) : ModelToPojo<BookPOJO> {
+) : ModelToPojo<FullBookPOJO> {
     constructor(
         title: String,
         chapters: MutableList<Chapter>,
@@ -29,7 +31,11 @@ data class Book(
         return series != null
     }
 
-    override fun toPojo(): BookPOJO {
-        return BookPOJO(title, seriesEntry)
+    fun toSimplePojo() : BookPOJO = BookPOJO(title, seriesEntry)
+
+    override fun toPojo(): FullBookPOJO {
+        val chapters = mutableListOf<ChapterPOJO>()
+        this.chapters.forEach { chapters.add(it.toPojo()) }
+        return FullBookPOJO(toSimplePojo(), chapters, author.toPojo(), series?.toPojo())
     }
 }

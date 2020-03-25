@@ -39,7 +39,7 @@ class LibraryFragment : Fragment() {
         recyclerView.adapter = libraryAdapter
 
         viewModel.getBooks.observe(viewLifecycleOwner, Observer { books ->
-            libraryAdapter.setBooks(books)
+            libraryAdapter.set(books)
         })
 
         setSwipeListeners()
