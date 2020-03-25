@@ -3,6 +3,7 @@ package com.ruurd.peruse.ui.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -13,63 +14,49 @@ import com.google.android.material.snackbar.Snackbar
 import com.ruurd.peruse.R
 import com.ruurd.peruse.data.repository.AppRepository
 import com.ruurd.peruse.ui.dialogs.utils.DialogUtils
+import kotlinx.android.synthetic.main.dialog_new_book.*
+import kotlinx.android.synthetic.main.dialog_new_book.view.*
 
 class AddBookDialogFragment : DialogFragment() {
 
     private lateinit var root: View
-    private lateinit var bookTitleTextEdit: EditText
-    private lateinit var bookAuthorTextEdit: EditText
-    private lateinit var bookSeriesTextEdit: EditText
-    private lateinit var bookSeriesEntryTextEdit: EditText
-    private lateinit var bookSeriesCheckbox: CheckBox
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         if (context == null) {
             throw IllegalStateException("Context can't be null when creating a dialog.")
         }
 
+        val appRepo = AppRepository(context!!)
+
         val builder = AlertDialog.Builder(context!!)
         val inflater = requireActivity().layoutInflater
         root = inflater.inflate(R.layout.dialog_new_book, null)
 
-        val appRepo = AppRepository(context!!)
-
-        // Getting views.
-        bookTitleTextEdit = root.findViewById(R.id.dialog_book_title)
-        bookAuthorTextEdit = root.findViewById(R.id.dialog_book_author)
-        bookSeriesCheckbox = root.findViewById(R.id.dialog_book_series_checkbox)
-        val bookSeriesContainer =
-            root.findViewById<ConstraintLayout>(R.id.dialog_book_series_container)
-        bookSeriesTextEdit = root.findViewById(R.id.dialog_book_series)
-        bookSeriesEntryTextEdit = root.findViewById(R.id.dialog_book_series_entry)
-        val cancelButton = root.findViewById<Button>(R.id.dialog_reading_discard_button)
-        val addButton = root.findViewById<Button>(R.id.dialog_reading_add_button)
-
         // Setting events.
-        bookSeriesCheckbox.setOnCheckedChangeListener { _, isChecked ->
+        root.dialog_book_series_checkbox.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                bookSeriesContainer.visibility = View.VISIBLE
+                root.dialog_book_series_container.visibility = View.VISIBLE
             } else {
-                bookSeriesContainer.visibility = View.GONE
+                root.dialog_book_series_container.visibility = View.GONE
             }
         }
 
-        cancelButton.setOnClickListener {
+        root.dialog_reading_discard_button.setOnClickListener {
             dialog?.cancel()
         }
 
-        addButton.setOnClickListener {
+        root.dialog_reading_add_button.setOnClickListener {
 
             if (isAnyFieldEmpty()) {
                 return@setOnClickListener
             }
 
-            val title = bookTitleTextEdit.text.toString()
-            val author = bookAuthorTextEdit.text.toString()
+            val title = root.dialog_book_title.text.toString()
+            val author = root.dialog_book_author.text.toString()
 
-            if (bookSeriesCheckbox.isChecked) {
-                val series = bookSeriesTextEdit.text.toString()
-                val entry = bookSeriesEntryTextEdit.text.toString().toFloat()
+            if (root.dialog_book_series_checkbox.isChecked) {
+                val series = root.dialog_book_series.text.toString()
+                val entry = root.dialog_book_series_entry.text.toString().toFloat()
 
                 appRepo.insert(title, author, series, entry)
             } else {
@@ -83,12 +70,12 @@ class AddBookDialogFragment : DialogFragment() {
     }
 
     private fun isAnyFieldEmpty(): Boolean {
-        if (bookSeriesCheckbox.isChecked) {
+        if (root.dialog_book_series_checkbox.isChecked) {
             if (DialogUtils.isEmpty(
-                    bookTitleTextEdit.text,
-                    bookAuthorTextEdit.text,
-                    bookSeriesTextEdit.text,
-                    bookSeriesEntryTextEdit.text
+                    root.dialog_book_title.text,
+                    root.dialog_book_author.text,
+                    root.dialog_book_series.text,
+                    root.dialog_book_series_entry.text
                 )
             ) {
                 Snackbar.make(
@@ -99,7 +86,7 @@ class AddBookDialogFragment : DialogFragment() {
                 return true
             }
         } else {
-            if (DialogUtils.isEmpty(bookTitleTextEdit.text, bookAuthorTextEdit.text)
+            if (DialogUtils.isEmpty(root.dialog_book_title.text, root.dialog_book_author.text)
             ) {
                 Snackbar.make(
                     root,
