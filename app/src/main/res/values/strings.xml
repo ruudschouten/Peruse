@@ -24,8 +24,12 @@
     <string name="dialog_reading_chapter_start">Start</string>
     <string name="dialog_reading_chapter_end">End</string>
     <string name="time_format">%1$sm %2$ss</string>
+    <string name="long_time_format">%1$sh %2$sm %3$ss</string>
     <string name="timer_hours_label">h</string>
     <string name="timer_minutes_label">m</string>
     <string name="timer_seconds_label">s</string>
     <string name="timer_placeholder">00</string>
+    <string name="timer_status_idle">Idle</string>
+    <string name="timer_status_running">Running</string>
+    <string name="timer_status_paused">Paused</string>
 </resources>
