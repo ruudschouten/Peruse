@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_views"
-        android:textColor="@color/font_secondary_color"
+        android:textColor="@color/fontSecondaryColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/library_book_recycler_title" />
 
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_views"
         android:layout_marginEnd="@dimen/spacing_views"
-        android:textColor="@color/font_secondary_color"
+        android:textColor="@color/fontSecondaryColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
