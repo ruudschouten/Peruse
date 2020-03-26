@@ -2,13 +2,14 @@ package com.ruurd.peruse
 
 import com.ruurd.peruse.timer.ITimer
 import com.ruurd.peruse.timer.State
-import com.ruurd.peruse.timer.Timer
+import com.ruurd.peruse.timer.TimePeriodTimer
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
 class TimerTest {
 
-    private lateinit var timer: Timer
+    private lateinit var timer: TimePeriodTimer
 
     private var timerTime: Long = 0L
     private var timerStateTime: Long = 0L
@@ -16,7 +17,7 @@ class TimerTest {
 
     @Before
     fun setup() {
-        timer = Timer()
+        timer = TimePeriodTimer()
         timer.onTickListener = object : ITimer.OnTickListener {
             override fun onTick(currentTime: Long) {
                 timerTime = currentTime
@@ -32,11 +33,19 @@ class TimerTest {
         }
     }
 
+    @After
+    fun cleanup() {
+        timer.stop()
+        timer.stopTimerRoutine()
+    }
+
     @Test
     fun testTimer() {
         timer.start()
-        Thread.sleep(2550)
+        Thread.sleep(2500)
         timer.pause()
+
+        Thread.sleep(1500)
 
         assert(timerTime in 2400L..2600L)
 
@@ -50,9 +59,5 @@ class TimerTest {
 
         timer.stop()
         assert(timerTime == timerStateTime)
-
-        Thread.sleep(1000)
-
-        assert(timer.time == 0L)
     }
 }

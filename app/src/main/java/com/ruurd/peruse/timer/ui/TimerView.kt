@@ -7,15 +7,17 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.ruurd.peruse.R
 import com.ruurd.peruse.timer.ITimer
 import com.ruurd.peruse.timer.State
+import com.ruurd.peruse.timer.TimePeriodTimer
 import com.ruurd.peruse.timer.Timer
 import com.ruurd.peruse.util.TimeUtil
 import kotlinx.android.synthetic.main.timer_layout.view.*
 import kotlinx.coroutines.*
 
 class TimerView(context: Context, attributeSet: AttributeSet) :
-    ConstraintLayout(context, attributeSet), ITimer, ITimer.OnTickListener, ITimer.OnStateChangeListener {
+    ConstraintLayout(context, attributeSet), ITimer, ITimer.OnTickListener,
+    ITimer.OnStateChangeListener {
 
-    private var timer = Timer()
+    private var timer = TimePeriodTimer()
     private var job = Job()
     private var scope = CoroutineScope(job + Dispatchers.Main)
 
@@ -123,9 +125,9 @@ class TimerView(context: Context, attributeSet: AttributeSet) :
         }
     }
 
-    fun getState() = timer.getState()
+    fun getState() = timer.state
 
-    fun getTime() = TimeUtil.toTime(timer.time).format(context)
+    fun getTime() = TimeUtil.toTime(timer.getCurrentDuration()).format(context)
 
     // endregion
 }
