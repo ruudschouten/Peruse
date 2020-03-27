@@ -32,7 +32,7 @@ class LibraryFragment : Fragment() {
         root = inflater.inflate(R.layout.fragment_library, container, false)
         val navController = findNavController()
 
-        libraryAdapter = LibraryRecyclerViewAdapter(mutableListOf(), navController)
+        libraryAdapter = LibraryRecyclerViewAdapter(listOf(), navController)
         root.fragment_library_list.layoutManager = LinearLayoutManager(activity)
         root.fragment_library_list.adapter = libraryAdapter
 

@@ -59,7 +59,7 @@ class BookFragment : Fragment() {
 
 
     private fun setupRecyclerView() {
-        chapterAdapter = BookChapterRecyclerViewAdapter(mutableListOf(), navController)
+        chapterAdapter = BookChapterRecyclerViewAdapter(listOf(), navController)
         root.fragment_book_chapter_list.layoutManager = LinearLayoutManager(activity)
         root.fragment_book_chapter_list.adapter = chapterAdapter
     }
