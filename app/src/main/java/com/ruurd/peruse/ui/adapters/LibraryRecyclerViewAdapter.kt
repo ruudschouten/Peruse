@@ -1,6 +1,5 @@
 package com.ruurd.peruse.ui.adapters
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import com.ruurd.peruse.R
@@ -13,10 +12,7 @@ class LibraryRecyclerViewAdapter(
 ) : BaseRecyclerAdapter<FullBookPOJO, LibraryViewHolder>(books) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LibraryViewHolder {
-        val inflatedView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.recycler_library_book, parent, false)
-
-        return LibraryViewHolder(inflatedView)
+        return LibraryViewHolder(inflateView(parent, R.layout.recycler_library_book))
     }
 
     override fun onBindViewHolder(holder: LibraryViewHolder, position: Int) {
