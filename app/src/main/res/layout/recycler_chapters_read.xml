@@ -10,19 +10,23 @@
 
     <EditText
         android:id="@+id/chapter_reading_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_views"
         android:hint="@string/dialog_reading_chapter_title"
         android:importantForAutofill="no"
         android:inputType="textCapWords"
+        app:layout_constraintEnd_toStartOf="@+id/chapter_reading_pages_label"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/chapter_reading_pages_label"
         style="@style/TextAppearance.MdcTypographyStyles.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/spacing_views_large"
+        android:focusable="false"
         android:text="@string/dialog_reading_chapter_pages"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dialog_book_pages_start"
