@@ -71,7 +71,7 @@ class AppRepository(context: Context) : CoroutineScope {
 
     fun fullUpdate(book: Book) = launch {
         update(book)
-        update(book.chapters)
+        update(book.chapters, book.id)
         update(book.author)
         if (book.isInSeries()) {
             update(book.series!!)
@@ -79,13 +79,13 @@ class AppRepository(context: Context) : CoroutineScope {
     }
 
     fun update(book: Book) = launch {
-        bookRepository.update(book.toSimplePojo())
+        bookRepository.update(book.toPojo())
     }
 
-    fun update(chapters: List<Chapter>) = launch {
+    fun update(chapters: List<Chapter>, bookId: Long) = launch {
         val pojos = mutableListOf<ChapterPOJO>()
         chapters.forEach { pojos.add(it.toPojo()) }
-        chapterRepository.update(pojos)
+        chapterRepository.insertOrUpdate(pojos, bookId)
     }
 
     fun update(author: Author) = launch {
