@@ -15,7 +15,7 @@ interface ChapterDao {
     fun getChapters(bookId: Long): List<ChapterPOJO>
 
     @Query("SELECT * FROM chapters WHERE chapterId is :id ORDER BY chapterId ASC LIMIT 1")
-    fun get(id: Long) : ChapterPOJO
+    fun get(id: Long) : ChapterPOJO?
 
     @Insert
     suspend fun insert(chapterPOJO: ChapterPOJO): Long
