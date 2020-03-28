@@ -8,10 +8,15 @@ import com.ruurd.peruse.models.Series
 data class SeriesPOJO(
     val name: String
 ) : PojoToModel<Series> {
+
+    constructor(id: Long, name: String) : this(name) {
+        seriesId = id
+    }
+
     @PrimaryKey(autoGenerate = true)
     var seriesId: Long = 0
 
     override fun toModel(): Series {
-        return Series(name)
+        return Series(seriesId, name)
     }
 }

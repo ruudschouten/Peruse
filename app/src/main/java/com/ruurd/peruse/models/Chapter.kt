@@ -5,7 +5,8 @@ import com.ruurd.peruse.data.pojo.ChapterPOJO
 import com.ruurd.peruse.util.TimeUtil
 
 data class Chapter(
-    val title: String,
+    var id: Long,
+    var title: String,
     var pages: Int,
     var duration: Long
 ) : ModelToPojo<ChapterPOJO> {
@@ -13,13 +14,25 @@ data class Chapter(
     constructor(
         title: String,
         pages: Int
-    ) : this(title, pages, 0L)
+    ) : this(0L, title, pages, 0L)
+
+    constructor(
+        title: String,
+        pages: Int,
+        duration: Long
+    ) : this(0L, title, pages, duration)
+
+    constructor() : this("", 0)
 
     fun getFormattedTime(context: Context): String {
         return TimeUtil.toTime(duration).format(context)
     }
 
     override fun toPojo(): ChapterPOJO {
-        return ChapterPOJO(title, pages, duration)
+        return ChapterPOJO(id, title, pages, duration)
+    }
+
+    fun toPojo(bookId: Long) : ChapterPOJO {
+        return ChapterPOJO(id, title, pages, duration).also { it.bookId = bookId }
     }
 }

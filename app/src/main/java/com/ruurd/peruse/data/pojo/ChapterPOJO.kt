@@ -22,10 +22,19 @@ data class ChapterPOJO(
         duration: Long
     ) : this(title, pages, duration, 0)
 
+    constructor(
+        id: Long,
+        title: String,
+        pages: Int,
+        duration: Long
+    ) : this(title, pages, duration, 0) {
+        chapterId = id
+    }
+
     @PrimaryKey(autoGenerate = true)
     var chapterId: Long = 0
 
     override fun toModel(): Chapter {
-        return Chapter(title, pages, duration)
+        return Chapter(chapterId, title, pages, duration)
     }
 }

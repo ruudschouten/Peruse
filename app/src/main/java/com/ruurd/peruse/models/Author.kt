@@ -3,8 +3,12 @@ package com.ruurd.peruse.models
 import com.ruurd.peruse.data.pojo.AuthorPOJO
 
 data class Author(
+    var id: Long,
     var name: String
 ) : ModelToPojo<AuthorPOJO> {
+
+    constructor(name: String) : this(0L, name)
+
     private val books: MutableList<Book> = mutableListOf()
     private val series: MutableList<Series> = mutableListOf()
 
@@ -17,6 +21,6 @@ data class Author(
     }
 
     override fun toPojo(): AuthorPOJO {
-        return AuthorPOJO(name)
+        return AuthorPOJO(id, name)
     }
 }

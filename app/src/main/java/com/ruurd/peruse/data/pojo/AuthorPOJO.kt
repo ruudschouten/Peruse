@@ -8,10 +8,15 @@ import com.ruurd.peruse.models.Author
 data class AuthorPOJO(
     val name: String
 ) : PojoToModel<Author> {
+
+    constructor(id: Long, name: String) : this(name) {
+        authorId = id
+    }
+
     @PrimaryKey(autoGenerate = true)
     var authorId: Long = 0
 
     override fun toModel(): Author {
-        return Author(name)
+        return Author(authorId, name)
     }
 }

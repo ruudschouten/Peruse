@@ -24,6 +24,24 @@ data class BookPOJO(
         bookAuthorId: Long
     ) : this(title, bookAuthorId, 0, 0f)
 
+    constructor(
+        id: Long,
+        title: String,
+        seriesEntry: Float
+    ) : this(title, 0, 0, seriesEntry) {
+        bookId = id
+    }
+
+    constructor(
+        id: Long,
+        title: String,
+        bookAuthorId: Long,
+        bookSeriesId: Long,
+        seriesEntry: Float
+    ) : this(title, bookAuthorId, bookSeriesId, seriesEntry) {
+        bookId = id
+    }
+
     @PrimaryKey(autoGenerate = true)
     var bookId: Long = 0
 }

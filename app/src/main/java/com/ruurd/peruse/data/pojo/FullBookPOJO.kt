@@ -28,6 +28,7 @@ data class FullBookPOJO(
         val chapters = mutableListOf<Chapter>()
         this.chapters.forEach { chapters.add(it.toModel()) }
         return Book(
+            book.bookId,
             book.title,
             chapters,
             author.toModel(),

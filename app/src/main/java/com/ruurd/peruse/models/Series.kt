@@ -3,8 +3,12 @@ package com.ruurd.peruse.models
 import com.ruurd.peruse.data.pojo.SeriesPOJO
 
 data class Series(
+    var id: Long,
     var name: String
 ) : ModelToPojo<SeriesPOJO> {
+
+    constructor(name: String) : this(0L, name)
+
     private val books: MutableMap<Float, Book> = mutableMapOf()
 
     fun addBook(entry: Float, book: Book): Boolean {
@@ -18,6 +22,6 @@ data class Series(
     }
 
     override fun toPojo(): SeriesPOJO {
-        return SeriesPOJO(name)
+        return SeriesPOJO(id, name)
     }
 }
