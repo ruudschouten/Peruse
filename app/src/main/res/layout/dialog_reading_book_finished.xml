@@ -71,8 +71,7 @@
 
         <Button
             android:id="@+id/dialog_reading_add_button"
-            style="@style/ButtonAppearance.DisabledDialogStyle"
-            android:enabled="false"
+            style="@style/ButtonAppearance.DialogStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_views"
