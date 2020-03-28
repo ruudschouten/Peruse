@@ -17,17 +17,16 @@ object TimeUtil {
             if (hours > 1) {
                 return String.format(
                     context.getString(
-                        R.string.time_format,
+                        R.string.long_time_format,
+                        hoursFormatted(),
                         minutesFormatted(),
                         secondsFormatted()
                     )
                 )
             }
-
             return String.format(
                 context.getString(
-                    R.string.long_time_format,
-                    hoursFormatted(),
+                    R.string.time_format,
                     minutesFormatted(),
                     secondsFormatted()
                 )
