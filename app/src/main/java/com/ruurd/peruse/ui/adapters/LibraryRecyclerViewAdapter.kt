@@ -12,7 +12,7 @@ class LibraryRecyclerViewAdapter(
 ) : BaseRecyclerAdapter<FullBookPOJO, LibraryViewHolder>(books) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LibraryViewHolder {
-        return LibraryViewHolder(inflateView(parent, R.layout.recycler_library_book))
+        return LibraryViewHolder(inflateView(parent, R.layout.recycler_library_book), parent.context)
     }
 
     override fun onBindViewHolder(holder: LibraryViewHolder, position: Int) {

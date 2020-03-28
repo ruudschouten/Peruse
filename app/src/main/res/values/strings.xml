@@ -10,6 +10,8 @@
     <string name="series_entry">Series Entry</string>
     <string name="series_with_entry">%1$s #%2$s</string>
     <string name="book_written_by_author">by %1$s</string>
+    <string name="book_library_chapters_read">%1$s Chapters read </string>
+    <string name="book_library_chapters_average_time">Average chapter time: %1$s</string>
     <string name="dialog_book_new_header">Add New Book</string>
     <string name="dialog_book_series_checkbox">Is part of a series?</string>
     <string name="dialog_option_discard">Discard</string>
