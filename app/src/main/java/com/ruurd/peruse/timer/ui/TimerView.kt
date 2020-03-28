@@ -8,7 +8,6 @@ import com.ruurd.peruse.R
 import com.ruurd.peruse.timer.ITimer
 import com.ruurd.peruse.timer.State
 import com.ruurd.peruse.timer.TimePeriodTimer
-import com.ruurd.peruse.timer.Timer
 import com.ruurd.peruse.util.TimeUtil
 import kotlinx.android.synthetic.main.timer_layout.view.*
 import kotlinx.coroutines.*
@@ -127,7 +126,9 @@ class TimerView(context: Context, attributeSet: AttributeSet) :
 
     fun getState() = timer.state
 
-    fun getTime() = TimeUtil.toTime(timer.getCurrentDuration()).format(context)
+    fun getTime() = timer.getCurrentDuration()
+
+    fun getFormattedTime() = TimeUtil.toTime(timer.getCurrentDuration()).format(context)
 
     // endregion
 }
