@@ -25,6 +25,18 @@ class BookRepository(context: Context) : CoroutineScope {
         dao.update(pojo)
     }
 
+    suspend fun update(fullPojo: FullBookPOJO) {
+        val pojo = BookPOJO(
+            fullPojo.book.bookId,
+            fullPojo.book.title,
+            fullPojo.author.authorId,
+            if (fullPojo.series!= null) fullPojo.series.seriesId else 0,
+            fullPojo.book.seriesEntry
+        )
+
+        dao.update(pojo)
+    }
+
     fun get(): LiveData<List<BookPOJO>> {
         return dao.getBooks()
     }
