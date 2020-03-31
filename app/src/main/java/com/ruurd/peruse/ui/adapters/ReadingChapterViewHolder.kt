@@ -10,7 +10,9 @@ class ReadingChapterViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
     fun getChapter(): Chapter {
         val start = view.dialog_book_pages_start.text.toString().toInt()
         val end = view.dialog_book_pages_end.text.toString().toInt()
-        val pages = end - start
+
+        // Add two pages since start and end were also read
+        val pages = (end - start) + 2
         return Chapter(view.chapter_reading_title.text.toString(), pages)
     }
 }
