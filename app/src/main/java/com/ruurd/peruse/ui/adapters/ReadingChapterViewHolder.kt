@@ -7,6 +7,11 @@ import kotlinx.android.synthetic.main.recycler_chapters_read.view.*
 
 class ReadingChapterViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
 
+    fun bind(chapter: Chapter) {
+        view.chapter_reading_title.setText(chapter.title)
+        view.dialog_book_pages_start.setText(chapter.start.toString())
+    }
+
     fun isAnyFieldEmpty(): Boolean {
         if (view.dialog_book_pages_start.text.isNullOrEmpty()) {
             return true
@@ -25,8 +30,6 @@ class ReadingChapterViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
         val start = view.dialog_book_pages_start.text.toString().toInt()
         val end = view.dialog_book_pages_end.text.toString().toInt()
 
-        // Add two pages since start and end were also read
-        val pages = (end - start) + 2
-        return Chapter(view.chapter_reading_title.text.toString(), pages)
+        return Chapter(view.chapter_reading_title.text.toString(), start, end, System.currentTimeMillis())
     }
 }

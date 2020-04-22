@@ -13,5 +13,6 @@ class ReadingChapterRecyclerViewAdapter(chapters: MutableList<Chapter>) :
     }
 
     override fun onBindViewHolder(holder: ReadingChapterViewHolder, position: Int) {
+        holder.bind(entries[position])
     }
 }
