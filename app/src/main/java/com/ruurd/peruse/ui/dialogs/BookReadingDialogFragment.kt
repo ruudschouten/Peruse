@@ -13,6 +13,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.ruurd.peruse.R
 import com.ruurd.peruse.data.pojo.FullBookPOJO
 import com.ruurd.peruse.data.repository.AppRepository
@@ -22,6 +23,8 @@ import com.ruurd.peruse.ui.adapters.ReadingChapterRecyclerViewAdapter
 import com.ruurd.peruse.ui.adapters.ReadingChapterViewHolder
 import kotlinx.android.synthetic.main.dialog_reading_book.view.*
 import kotlinx.android.synthetic.main.dialog_reading_book_finished.view.*
+import kotlinx.android.synthetic.main.dialog_reading_book_finished.view.dialog_reading_add_button
+import kotlinx.android.synthetic.main.dialog_reading_book_finished.view.dialog_reading_discard_button
 import kotlinx.android.synthetic.main.dialog_reading_book_timer.view.*
 import java.lang.Exception
 
@@ -76,6 +79,14 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
         root.dialog_reading_cancel_button.setOnClickListener {
             dialog?.cancel()
         }
+
+        root.dialog_reading_add_start_chapter.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                root.dialog_reading_first_chapter.visibility = VISIBLE
+            } else {
+                root.dialog_reading_first_chapter.visibility = GONE
+            }
+        }
     }
 
     private fun setupTimerValues() {
@@ -111,8 +122,12 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
             val chapters = mutableListOf<Chapter>()
 
             for (i in 0 until chapterAdapter.itemCount) {
-                val viewHolder = root.dialog_reading_chapters.findViewHolderForAdapterPosition(i)
-                val chapter = (viewHolder as ReadingChapterViewHolder).getChapter()
+                val viewHolder = root.dialog_reading_chapters.findViewHolderForAdapterPosition(i) as ReadingChapterViewHolder
+                if(viewHolder.isAnyFieldEmpty()) {
+                    Snackbar.make(root, "One or more Chapters have missing values.", Snackbar.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                val chapter = viewHolder.getChapter()
                 chapters.add(chapter)
                 totalPages += chapter.pages
             }
@@ -140,7 +155,7 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
                     val count = text.toInt()
                     updateChapterAdapter(count)
                     enableAddButton()
-                } catch (ex:  NumberFormatException) {
+                } catch (ex: NumberFormatException) {
                     disableAddButton()
                 }
                 true
@@ -149,7 +164,7 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
             }
         }
         root.dialog_reading_chapter_amount.setOnFocusChangeListener { _, hasFocus ->
-            if(!hasFocus) {
+            if (!hasFocus) {
                 if (root.dialog_reading_chapter_amount.text.toString().isEmpty()) {
                     disableAddButton()
                 }
