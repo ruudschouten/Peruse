@@ -79,14 +79,6 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
         root.dialog_reading_cancel_button.setOnClickListener {
             dialog?.cancel()
         }
-
-        root.dialog_reading_add_start_chapter.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                root.dialog_reading_first_chapter.visibility = VISIBLE
-            } else {
-                root.dialog_reading_first_chapter.visibility = GONE
-            }
-        }
     }
 
     private fun setupTimerValues() {
