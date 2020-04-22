@@ -19,6 +19,7 @@ import com.ruurd.peruse.models.Chapter
 import com.ruurd.peruse.timer.State
 import com.ruurd.peruse.ui.adapters.ReadingChapterRecyclerViewAdapter
 import com.ruurd.peruse.ui.adapters.ReadingChapterViewHolder
+import com.ruurd.peruse.util.KeyboardUtil.hideKeyboard
 import kotlinx.android.synthetic.main.dialog_reading_book.view.*
 import kotlinx.android.synthetic.main.dialog_reading_book_finished.view.*
 import kotlinx.android.synthetic.main.dialog_reading_book_timer.view.*
@@ -72,6 +73,8 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
                 firstChapter =
                     Chapter(root.dialog_reading_first_chapter_title.text.toString(), start, 0)
                 chapterAdapter.entries[0] = firstChapter
+
+                root.hideKeyboard()
             }
             root.dialog_reading_start_button_container.visibility = GONE
             root.dialog_reading_first_chapter_container.visibility = GONE
