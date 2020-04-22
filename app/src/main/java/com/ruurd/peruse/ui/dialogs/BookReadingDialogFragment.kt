@@ -3,9 +3,7 @@ package com.ruurd.peruse.ui.dialogs
 import android.app.AlertDialog
 import android.app.Dialog
 import android.graphics.drawable.Drawable
-import android.nfc.FormatException
 import android.os.Bundle
-import android.text.Editable
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -23,16 +21,15 @@ import com.ruurd.peruse.ui.adapters.ReadingChapterRecyclerViewAdapter
 import com.ruurd.peruse.ui.adapters.ReadingChapterViewHolder
 import kotlinx.android.synthetic.main.dialog_reading_book.view.*
 import kotlinx.android.synthetic.main.dialog_reading_book_finished.view.*
-import kotlinx.android.synthetic.main.dialog_reading_book_finished.view.dialog_reading_add_button
-import kotlinx.android.synthetic.main.dialog_reading_book_finished.view.dialog_reading_discard_button
 import kotlinx.android.synthetic.main.dialog_reading_book_timer.view.*
-import java.lang.Exception
 
 class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
 
     private lateinit var root: View
 
     private lateinit var chapterAdapter: ReadingChapterRecyclerViewAdapter
+    private lateinit var firstChapter: Chapter
+    private var addFirstChapter: Boolean = false
 
     private lateinit var pauseDrawable: Drawable
     private lateinit var playDrawable: Drawable
@@ -70,7 +67,14 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
         root.dialog_reading_header.text = getString(R.string.dialog_reading_header, book.book.title)
 
         root.dialog_reading_start_button.setOnClickListener {
+            if (addFirstChapter) {
+                val start = root.dialog_reading_first_chapter_start.text.toString().toInt()
+                firstChapter =
+                    Chapter(root.dialog_reading_first_chapter_title.text.toString(), start, 0)
+                chapterAdapter.entries[0] = firstChapter
+            }
             root.dialog_reading_start_button_container.visibility = GONE
+            root.dialog_reading_first_chapter_container.visibility = GONE
             root.dialog_reading_timer_buttons.visibility = VISIBLE
             root.dialog_reading_timer.start()
             setToggleDrawable()
@@ -78,6 +82,15 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
 
         root.dialog_reading_cancel_button.setOnClickListener {
             dialog?.cancel()
+        }
+
+        root.dialog_reading_add_start_chapter.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                root.dialog_reading_first_chapter.visibility = VISIBLE
+            } else {
+                root.dialog_reading_first_chapter.visibility = GONE
+            }
+            addFirstChapter = isChecked
         }
     }
 
@@ -114,9 +127,14 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
             val chapters = mutableListOf<Chapter>()
 
             for (i in 0 until chapterAdapter.itemCount) {
-                val viewHolder = root.dialog_reading_chapters.findViewHolderForAdapterPosition(i) as ReadingChapterViewHolder
-                if(viewHolder.isAnyFieldEmpty()) {
-                    Snackbar.make(root, "One or more Chapters have missing values.", Snackbar.LENGTH_SHORT).show()
+                val viewHolder =
+                    root.dialog_reading_chapters.findViewHolderForAdapterPosition(i) as ReadingChapterViewHolder
+                if (viewHolder.isAnyFieldEmpty()) {
+                    Snackbar.make(
+                        root,
+                        "One or more Chapters have missing values.",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                     return@setOnClickListener
                 }
                 val chapter = viewHolder.getChapter()
@@ -167,6 +185,10 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
     private fun updateChapterAdapter(chapterCount: Int) {
         chapterAdapter.entries.clear()
         for (i in 0 until chapterCount) {
+            if (i == 0 && addFirstChapter) {
+                chapterAdapter.add(firstChapter)
+                continue
+            }
             chapterAdapter.add(Chapter())
         }
         chapterAdapter.notifyDataSetChanged()
