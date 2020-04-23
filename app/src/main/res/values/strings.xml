@@ -9,7 +9,7 @@
     <string name="chapters">Chapters</string>
     <string name="series_entry">Series Entry</string>
     <string name="series_with_entry">%1$s #%2$s</string>
-    <string name="book_chapters_pages">%1$s pages</string>
+    <string name="book_chapters_pages">%1$d pages (%2$d up to %3$d)</string>
     <string name="book_written_by_author">by %1$s</string>
     <string name="book_series_with_entry">%1$s - %2$.1f</string>
     <string name="book_library_chapters_read">%1$d chapters,</string>

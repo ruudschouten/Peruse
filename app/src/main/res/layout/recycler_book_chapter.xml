@@ -11,9 +11,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_views"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="@dimen/spacing_views"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/book_chapter_recycler_date"
+        style="@style/TextAppearance.MdcTypographyStyles.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_views"
+        android:layout_marginBottom="@dimen/spacing_views"
+        android:textColor="@color/fontSecondaryColor"
+        android:textSize="@dimen/text_size_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/book_chapter_recycler_title" />
 
     <TextView
         android:id="@+id/book_chapter_recycler_pages"
@@ -36,7 +49,7 @@
         android:layout_marginTop="@dimen/spacing_views_small"
         android:layout_marginEnd="@dimen/spacing_views"
         android:layout_marginBottom="@dimen/spacing_views_small"
-        android:paddingBottom="@dimen/spacing_views"
+        android:paddingBottom="@dimen/spacing_views_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/book_chapter_recycler_pages" />
