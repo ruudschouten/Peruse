@@ -30,11 +30,19 @@ data class Book(
         seriesEntry: Float
     ) : this(0L, title, chapters, author, series, seriesEntry)
 
-    fun averageTime(context: Context): String {
+    fun averageChapterTime(context: Context): String {
         if (chapters.size == 0) {
             return TimeUtil.toTime(0).format(context)
         }
         val average = chapters.map { it.duration }.average().toLong()
+        return TimeUtil.toTime(average).format(context)
+    }
+
+    fun averagePageTime(context: Context): String {
+        if (chapters.size == 0) {
+            return TimeUtil.toTime(0).format(context)
+        }
+        val average = chapters.map { it.duration / it.pages }.average().toLong()
         return TimeUtil.toTime(average).format(context)
     }
 

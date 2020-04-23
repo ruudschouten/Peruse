@@ -14,11 +14,19 @@ class LibraryViewHolder(view: View, var context: Context) :
 
     override fun setupViews() {
         view.library_book_recycler_title.text = model.title
-        view.library_book_recycler_average_time.text =
-            context.getString(R.string.book_library_chapters_average_time, model.averageTime(context))
-        view.library_book_recycler_chapter_count.text =
-            context.getString(R.string.book_library_chapters_read, model.chapters.size.toString())
-        view.library_book_recycler_series.text = model.series?.name
+        val chaptersRead = model.chapters.size
+        if(chaptersRead > 0) {
+            view.library_book_recycler_chapter_count.text = context.getString(R.string.book_library_chapters_read, chaptersRead)
+            view.library_book_recycler_average_chapter_time.text = context.getString(R.string.book_library_average_time, model.averageChapterTime(context))
+            view.library_book_recycler_average_page_time.text = context.getString(R.string.book_library_page_average_time, model.averagePageTime(context))
+        } else {
+            view.library_book_recycler_chapter_count.visibility = View.GONE
+            view.library_book_recycler_average_chapter_time.visibility = View.GONE
+            view.library_book_recycler_average_page_time.visibility = View.GONE
+        }
+        if (model.series != null) {
+            view.library_book_recycler_series.text = context.getString(R.string.book_series_with_entry, model.series!!.name, model.seriesEntry)
+        }
     }
 
     override fun setupOnClickListener() {
