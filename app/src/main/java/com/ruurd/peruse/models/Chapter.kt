@@ -48,7 +48,7 @@ data class Chapter(
     }
 
     override fun toPojo(): ChapterPOJO {
-        return ChapterPOJO(title, start, end, pages, duration, date)
+        return ChapterPOJO(title, start, end, pages, duration, date).also { it.chapterId = id }
     }
 
     fun toPojo(bookId: Long) : ChapterPOJO {
