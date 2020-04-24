@@ -162,16 +162,9 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
             dialog?.cancel()
         }
 
-        root.dialog_reading_chapter_amount.setOnEditorActionListener { v, actionId, _ ->
+        root.dialog_reading_chapter_amount.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                try {
-                    val text = v.text.toString()
-                    val count = text.toInt()
-                    updateChapterAdapter(count)
-                    enableAddButton()
-                } catch (ex: NumberFormatException) {
-                    disableAddButton()
-                }
+                updateChaptersRead()
                 true
             } else {
                 false
@@ -179,10 +172,19 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
         }
         root.dialog_reading_chapter_amount.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                if (root.dialog_reading_chapter_amount.text.toString().isEmpty()) {
-                    disableAddButton()
-                }
+                updateChaptersRead()
             }
+        }
+    }
+
+    private fun updateChaptersRead() {
+        try {
+            val text = root.dialog_reading_chapter_amount.text.toString()
+            val count = text.toInt()
+            updateChapterAdapter(count)
+            enableAddButton()
+        } catch (ex: NumberFormatException) {
+            disableAddButton()
         }
     }
 
