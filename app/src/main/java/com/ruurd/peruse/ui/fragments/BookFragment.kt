@@ -18,11 +18,11 @@ import com.ruurd.peruse.data.pojo.FullBookPOJO
 import com.ruurd.peruse.models.Chapter
 import com.ruurd.peruse.ui.adapters.BookChapterRecyclerViewAdapter
 import com.ruurd.peruse.ui.dialogs.BookReadingDialogFragment
+import com.ruurd.peruse.ui.dialogs.ChapterTimeDialogFragment
 import com.ruurd.peruse.ui.fragments.viewmodels.BookViewModel
 import kotlinx.android.synthetic.main.fragment_book.view.*
 
 class BookFragment : Fragment() {
-
 
     private lateinit var viewModel: BookViewModel
     private lateinit var chapterAdapter: BookChapterRecyclerViewAdapter
@@ -51,6 +51,10 @@ class BookFragment : Fragment() {
             setChapters()
         })
 
+        root.fragment_book_calculate.setOnClickListener {
+            ChapterTimeDialogFragment(this.book.toModel()).show(parentFragmentManager, "calculate_chapter_time")
+        }
+
         root.fragment_book_start_reading_fab.setOnClickListener {
             // Navigate to reading fragment.
             BookReadingDialogFragment(this.book).show(parentFragmentManager, "reading_book")
@@ -77,7 +81,8 @@ class BookFragment : Fragment() {
     private fun setViewValues() {
         val model = book.toModel()
         root.fragment_book_title.text = model.title
-        root.fragment_book_author.text = getString(R.string.book_written_by_author, model.author.name)
+        root.fragment_book_author.text =
+            getString(R.string.book_written_by_author, model.author.name)
 
         if (model.isInSeries()) {
             root.fragment_book_series.text = getString(
@@ -87,6 +92,12 @@ class BookFragment : Fragment() {
             )
         } else {
             root.fragment_book_series.visibility = GONE
+        }
+
+        if (model.chapters.isEmpty()) {
+            root.fragment_book_calculate.visibility = GONE
+        } else {
+            root.fragment_book_calculate.visibility = VISIBLE
         }
     }
 }

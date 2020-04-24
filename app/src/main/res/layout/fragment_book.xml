@@ -88,6 +88,18 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fragment_book_calculate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorSecondaryAccent"
+        android:layout_margin="@dimen/spacing_fab"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_calculate_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fragment_book_start_reading_fab" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fragment_book_start_reading_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
