@@ -4,11 +4,13 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.TextWatcher
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -24,6 +26,8 @@ import kotlinx.android.synthetic.main.chapter_incomplete.view.*
 import kotlinx.android.synthetic.main.dialog_reading_book.view.*
 import kotlinx.android.synthetic.main.dialog_reading_book_finished.view.*
 import kotlinx.android.synthetic.main.dialog_reading_book_timer.view.*
+import kotlinx.android.synthetic.main.fragment_book.view.*
+import kotlinx.android.synthetic.main.recycler_chapters_read.view.*
 
 class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
 
@@ -165,16 +169,14 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
         root.dialog_reading_chapter_amount.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 updateChaptersRead()
-                true
-            } else {
                 false
+            } else {
+                true
             }
         }
-        root.dialog_reading_chapter_amount.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) {
-                updateChaptersRead()
-            }
-        }
+        root.dialog_reading_chapter_amount.addTextChangedListener(afterTextChanged = {
+            updateChaptersRead()
+        })
     }
 
     private fun updateChaptersRead() {
