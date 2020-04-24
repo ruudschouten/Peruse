@@ -38,6 +38,11 @@ class LibraryFragment : Fragment() {
 
         viewModel.getBooks.observe(viewLifecycleOwner, Observer { books ->
             libraryAdapter.set(books)
+            if (books.isNotEmpty()) {
+                root.library_empty_data.visibility = View.GONE
+            } else {
+                root.library_empty_data.visibility = View.VISIBLE
+            }
         })
 
         setSwipeListeners()

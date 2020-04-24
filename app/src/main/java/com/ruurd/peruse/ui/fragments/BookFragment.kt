@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ruurd.peruse.R
 import com.ruurd.peruse.data.pojo.FullBookPOJO
+import com.ruurd.peruse.models.Chapter
 import com.ruurd.peruse.ui.adapters.BookChapterRecyclerViewAdapter
 import com.ruurd.peruse.ui.dialogs.BookReadingDialogFragment
 import com.ruurd.peruse.ui.fragments.viewmodels.BookViewModel
@@ -46,7 +48,7 @@ class BookFragment : Fragment() {
         viewModel.getBook(args.bookId).observe(viewLifecycleOwner, Observer { book ->
             this.book = book
             setViewValues()
-            chapterAdapter.set(book.chapters)
+            setChapters()
         })
 
         root.fragment_book_start_reading_fab.setOnClickListener {
@@ -57,6 +59,14 @@ class BookFragment : Fragment() {
         return root
     }
 
+    private fun setChapters() {
+        chapterAdapter.set(book.chapters)
+        if (book.chapters.isNotEmpty()) {
+            root.fragment_book_empty_data.visibility = GONE
+        } else {
+            root.fragment_book_empty_data.visibility = VISIBLE
+        }
+    }
 
     private fun setupRecyclerView() {
         chapterAdapter = BookChapterRecyclerViewAdapter(listOf(), navController)
