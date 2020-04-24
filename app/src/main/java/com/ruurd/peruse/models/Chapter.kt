@@ -15,6 +15,13 @@ data class Chapter(
 ) : ModelToPojo<ChapterPOJO> {
 
     constructor(
+        start: Int,
+        end: Int
+    ) : this(0L, "", start, end, 0, 0L, 0L) {
+        pages = (end - start) + 2
+    }
+
+    constructor(
         title: String,
         start: Int,
         end: Int
@@ -43,6 +50,14 @@ data class Chapter(
 
     constructor() : this("", 0, 0)
 
+    fun estimatedDuration(book: Book): Long {
+        return pages * book.averagePageTime()
+    }
+
+    fun formattedEstimatedDuraction(book: Book, context: Context): String {
+        return TimeUtil.toTime(estimatedDuration(book)).format(context)
+    }
+
     fun getFormattedTime(context: Context): String {
         return TimeUtil.toTime(duration).format(context)
     }
@@ -51,7 +66,7 @@ data class Chapter(
         return ChapterPOJO(title, start, end, pages, duration, date).also { it.chapterId = id }
     }
 
-    fun toPojo(bookId: Long) : ChapterPOJO {
+    fun toPojo(bookId: Long): ChapterPOJO {
         return toPojo().also { it.bookId = bookId }
     }
 }
