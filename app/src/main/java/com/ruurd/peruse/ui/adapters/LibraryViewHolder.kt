@@ -17,8 +17,8 @@ class LibraryViewHolder(view: View, var context: Context) :
         val chaptersRead = model.chapters.size
         if(chaptersRead > 0) {
             view.library_book_recycler_chapter_count.text = context.getString(R.string.book_library_chapters_read, chaptersRead)
-            view.library_book_recycler_average_chapter_time.text = context.getString(R.string.book_library_average_time, model.averageChapterTime(context))
-            view.library_book_recycler_average_page_time.text = context.getString(R.string.book_library_page_average_time, model.averagePageTime(context))
+            view.library_book_recycler_average_chapter_time.text = context.getString(R.string.book_library_average_time, model.formattedAverageChapterTime(context))
+            view.library_book_recycler_average_page_time.text = context.getString(R.string.book_library_page_average_time, model.formattedAveragePageTime(context))
         } else {
             view.library_book_recycler_chapter_count.visibility = View.GONE
             view.library_book_recycler_average_chapter_time.visibility = View.GONE
