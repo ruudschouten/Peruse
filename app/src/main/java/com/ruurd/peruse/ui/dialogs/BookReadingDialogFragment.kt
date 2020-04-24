@@ -20,6 +20,7 @@ import com.ruurd.peruse.timer.State
 import com.ruurd.peruse.ui.adapters.ReadingChapterRecyclerViewAdapter
 import com.ruurd.peruse.ui.adapters.ReadingChapterViewHolder
 import com.ruurd.peruse.util.KeyboardUtil.hideKeyboard
+import kotlinx.android.synthetic.main.chapter_incomplete.view.*
 import kotlinx.android.synthetic.main.dialog_reading_book.view.*
 import kotlinx.android.synthetic.main.dialog_reading_book_finished.view.*
 import kotlinx.android.synthetic.main.dialog_reading_book_timer.view.*
@@ -69,9 +70,9 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
 
         root.dialog_reading_start_button.setOnClickListener {
             if (addFirstChapter) {
-                val start = root.dialog_reading_first_chapter_start.text.toString().toInt()
+                val start = root.chapter_incomplete_start.text.toString().toInt()
                 firstChapter =
-                    Chapter(root.dialog_reading_first_chapter_title.text.toString(), start, 0)
+                    Chapter(root.chapter_incomplete_title.text.toString(), start, 0)
                 chapterAdapter.entries[0] = firstChapter
 
                 root.hideKeyboard()

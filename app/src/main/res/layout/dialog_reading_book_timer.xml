@@ -75,39 +75,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <include
             android:id="@+id/dialog_reading_first_chapter"
+            layout="@layout/chapter_incomplete"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_views"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_reading_add_start_chapter">
-
-            <EditText
-                android:id="@+id/dialog_reading_first_chapter_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/spacing_views"
-                android:hint="@string/dialog_reading_chapter_title"
-                android:importantForAutofill="no"
-                android:inputType="textCapWords"
-                app:layout_constraintEnd_toStartOf="@+id/dialog_reading_first_chapter_start"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/dialog_reading_first_chapter_start"
-                style="@style/TextAppearance.MdcTypographyStyles.Body1"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/dialog_reading_chapter_start"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toBottomOf="@+id/dialog_reading_add_start_chapter" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
