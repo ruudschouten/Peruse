@@ -22,6 +22,7 @@ import com.ruurd.peruse.timer.State
 import com.ruurd.peruse.ui.adapters.ReadingChapterRecyclerViewAdapter
 import com.ruurd.peruse.ui.adapters.ReadingChapterViewHolder
 import com.ruurd.peruse.util.KeyboardUtil.hideKeyboard
+import com.ruurd.peruse.util.NotificationUtil
 import kotlinx.android.synthetic.main.chapter_incomplete.view.*
 import kotlinx.android.synthetic.main.dialog_reading_book.view.*
 import kotlinx.android.synthetic.main.dialog_reading_book_finished.view.*
@@ -46,6 +47,8 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
         if (context == null) {
             throw IllegalStateException("Context can't be null when creating a dialog.")
         }
+
+        NotificationUtil.createChannel(context!!)
 
         appRepo = AppRepository(context!!)
 
@@ -86,10 +89,12 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
             root.dialog_reading_timer_buttons.visibility = VISIBLE
             root.dialog_reading_timer.start()
             setToggleDrawable()
+
+            NotificationUtil.make(context!!, root.dialog_reading_timer)
         }
 
         root.dialog_reading_cancel_button.setOnClickListener {
-            dialog?.cancel()
+            closeDialog()
         }
 
         root.dialog_reading_add_start_chapter.setOnCheckedChangeListener { _, isChecked ->
@@ -117,6 +122,8 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
             root.dialog_reading_header.text = root.dialog_reading_timer.getFormattedTime()
             root.dialog_reading_timer_container.visibility = GONE
             root.dialog_reading_finished_container.visibility = VISIBLE
+
+            NotificationUtil.remove()
         }
     }
 
@@ -127,7 +134,7 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
 
         root.dialog_reading_discard_button.setOnClickListener {
             root.dialog_reading_timer.onDestroy()
-            dialog?.cancel()
+            closeDialog()
         }
 
         root.dialog_reading_add_button.setOnClickListener {
@@ -163,7 +170,7 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
             appRepo.fullUpdate(book)
 
             root.dialog_reading_timer.onDestroy()
-            dialog?.cancel()
+            closeDialog()
         }
 
         root.dialog_reading_chapter_amount.setOnEditorActionListener { _, actionId, _ ->
@@ -227,5 +234,10 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
             if (root.dialog_reading_timer.getState() == State.RUNNING) pauseDrawable
             else playDrawable
         )
+    }
+
+    private fun closeDialog() {
+        NotificationUtil.remove()
+        dialog?.cancel()
     }
 }

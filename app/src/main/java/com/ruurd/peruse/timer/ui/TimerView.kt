@@ -8,6 +8,7 @@ import com.ruurd.peruse.R
 import com.ruurd.peruse.timer.ITimer
 import com.ruurd.peruse.timer.State
 import com.ruurd.peruse.timer.TimePeriodTimer
+import com.ruurd.peruse.util.NotificationUtil
 import com.ruurd.peruse.util.TimeUtil
 import kotlinx.android.synthetic.main.timer_layout.view.*
 import kotlinx.coroutines.*
@@ -114,6 +115,7 @@ class TimerView(context: Context, attributeSet: AttributeSet) :
     override fun onTick(currentTime: Long) {
         scope.launch {
             setTimeText(currentTime)
+            NotificationUtil.updateTime(getFormattedTime(TimeUtil.TimeFormat.COLON))
         }
     }
 
