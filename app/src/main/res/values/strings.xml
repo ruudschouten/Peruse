@@ -30,6 +30,8 @@
     <string name="dialog_reading_chapter_end">End</string>
     <string name="time_format">%1$sm %2$ss</string>
     <string name="long_time_format">%1$sh %2$sm %3$ss</string>
+    <string name="time_format_colon">%1$s:%2$s</string>
+    <string name="long_time_format_colon">%1$s:%2$s:%3$s</string>
     <string name="timer_hours_label">h</string>
     <string name="timer_minutes_label">m</string>
     <string name="timer_seconds_label">s</string>

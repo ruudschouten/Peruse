@@ -128,7 +128,9 @@ class TimerView(context: Context, attributeSet: AttributeSet) :
 
     fun getTime() = timer.getCurrentDuration()
 
-    fun getFormattedTime() = TimeUtil.toTime(timer.getCurrentDuration()).format(context)
+    fun getFormattedTime(format: TimeUtil.TimeFormat = TimeUtil.TimeFormat.hhMMss) = TimeUtil.toTime(getTime()).format(context, format)
+
+    fun getTimer() = timer
 
     // endregion
 }

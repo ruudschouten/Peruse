@@ -10,23 +10,34 @@ object TimeUtil {
 
     class TimeHelper(duration: Long) {
         var hours: Long = TimeUnit.MILLISECONDS.toHours(duration)
-        var minutes: Long = TimeUnit.MILLISECONDS.toMinutes(duration) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(duration))
-        var seconds: Long = TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration))
+        var minutes: Long = TimeUnit.MILLISECONDS.toMinutes(duration) - TimeUnit.HOURS.toMinutes(
+            TimeUnit.MILLISECONDS.toHours(duration)
+        )
+        var seconds: Long = TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.MINUTES.toSeconds(
+            TimeUnit.MILLISECONDS.toMinutes(duration)
+        )
 
-        fun format(context: Context): String {
+        fun format(context: Context, timeFormat: TimeFormat = TimeFormat.hhMMss): String {
             if (hours > 1) {
-                return String.format(
-                    context.getString(
-                        R.string.long_time_format,
-                        hoursFormatted(),
-                        minutesFormatted(),
-                        secondsFormatted()
+                if (timeFormat == TimeFormat.hhMMss)
+                    return String.format(
+                        context.getString(
+                            when (timeFormat) {
+                                TimeFormat.hhMMss -> { R.string.long_time_format }
+                                TimeFormat.COLON -> { R.string.long_time_format_colon }
+                            },
+                            hoursFormatted(),
+                            minutesFormatted(),
+                            secondsFormatted()
+                        )
                     )
-                )
             }
             return String.format(
                 context.getString(
-                    R.string.time_format,
+                    when (timeFormat) {
+                        TimeFormat.hhMMss -> { R.string.time_format }
+                        TimeFormat.COLON -> { R.string.time_format_colon }
+                    },
                     minutesFormatted(),
                     secondsFormatted()
                 )
@@ -36,5 +47,11 @@ object TimeUtil {
         fun hoursFormatted() = hours.toString().padStart(2, '0')
         fun minutesFormatted() = minutes.toString().padStart(2, '0')
         fun secondsFormatted() = seconds.toString().padStart(2, '0')
+
+    }
+
+    enum class TimeFormat {
+        hhMMss,
+        COLON
     }
 }
