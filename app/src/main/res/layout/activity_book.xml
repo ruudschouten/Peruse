@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fragment_book_details_container"
+        android:id="@+id/activity_book_details_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_views"
@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/fragment_book_title"
+            android:id="@+id/activity_book_title"
             style="@style/TextAppearance.MdcTypographyStyles.Header1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,33 +25,34 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/fragment_book_series"
+            android:id="@+id/activity_book_series"
             style="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_views_small"
             android:textColor="@color/fontSecondaryColor"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_book_title" />
+            app:layout_constraintTop_toBottomOf="@+id/activity_book_title" />
 
         <TextView
-            android:id="@+id/fragment_book_author"
+            android:id="@+id/activity_book_author"
             style="@style/TextAppearance.MdcTypographyStyles.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_views_small"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_book_series" />
+            app:layout_constraintTop_toBottomOf="@+id/activity_book_series" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_book_details_container">
+        app:layout_constraintTop_toBottomOf="@+id/activity_book_details_container">
 
         <TextView
             android:id="@+id/textView"
@@ -66,7 +67,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <include
-            android:id="@+id/fragment_book_empty_data"
+            android:id="@+id/activity_book_empty_data"
             layout="@layout/recycler_empty_book_chapters"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,7 +77,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_book_chapter_list"
+            android:id="@+id/activity_book_chapter_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/spacing_views_small"
@@ -88,7 +89,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fragment_book_calculate"
+        android:id="@+id/activity_book_calculate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorSecondaryAccent"
@@ -97,10 +98,10 @@
         android:focusable="true"
         android:src="@drawable/ic_calculate_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/fragment_book_start_reading_fab" />
+        app:layout_constraintEnd_toStartOf="@+id/activity_book_start_reading_fab" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fragment_book_start_reading_fab"
+        android:id="@+id/activity_book_start_reading_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/spacing_fab"

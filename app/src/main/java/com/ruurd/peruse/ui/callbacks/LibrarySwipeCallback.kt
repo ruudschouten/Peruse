@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.ruurd.peruse.R
 import com.ruurd.peruse.ui.adapters.LibraryRecyclerViewAdapter
-import com.ruurd.peruse.ui.fragments.viewmodels.LibraryViewModel
+import com.ruurd.peruse.ui.activities.viewmodels.LibraryViewModel
 
 class LibrarySwipeCallback
     (

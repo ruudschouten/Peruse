@@ -26,9 +26,9 @@ class AddBookDialogFragment : DialogFragment() {
             throw IllegalStateException("Context can't be null when creating a dialog.")
         }
 
-        val appRepo = AppRepository(context!!)
+        val appRepo = AppRepository(requireContext())
 
-        val builder = AlertDialog.Builder(context!!)
+        val builder = AlertDialog.Builder(requireContext())
         val inflater = requireActivity().layoutInflater
         root = inflater.inflate(R.layout.dialog_new_book, null)
 

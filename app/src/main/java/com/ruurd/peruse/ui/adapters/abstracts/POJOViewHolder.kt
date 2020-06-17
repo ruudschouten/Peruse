@@ -17,12 +17,10 @@ abstract class POJOViewHolder<
 
     protected lateinit var model: TModel
     protected lateinit var pojo: TPOJO
-    protected lateinit var navController: NavController
 
-    override fun bind(pojo: TPOJO, navController: NavController) {
+    override fun bind(pojo: TPOJO) {
         this.pojo = pojo
         model = pojo.toModel()
-        this.navController = navController
 
         setupViews()
         setupOnClickListener()

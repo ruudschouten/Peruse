@@ -7,8 +7,7 @@ import com.ruurd.peruse.data.pojo.FullBookPOJO
 import com.ruurd.peruse.ui.adapters.abstracts.BaseRecyclerAdapter
 
 class LibraryRecyclerViewAdapter(
-    books: List<FullBookPOJO>,
-    private val navController: NavController
+    books: List<FullBookPOJO>
 ) : BaseRecyclerAdapter<FullBookPOJO, LibraryViewHolder>(books) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LibraryViewHolder {
@@ -16,6 +15,6 @@ class LibraryRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: LibraryViewHolder, position: Int) {
-        holder.bind(getAt(position), navController)
+        holder.bind(getAt(position))
     }
 }

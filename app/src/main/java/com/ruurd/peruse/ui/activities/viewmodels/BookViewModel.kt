@@ -1,4 +1,4 @@
-package com.ruurd.peruse.ui.fragments.viewmodels
+package com.ruurd.peruse.ui.activities.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

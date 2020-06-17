@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.text.TextWatcher
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -27,8 +26,6 @@ import kotlinx.android.synthetic.main.chapter_incomplete.view.*
 import kotlinx.android.synthetic.main.dialog_reading_book.view.*
 import kotlinx.android.synthetic.main.dialog_reading_book_finished.view.*
 import kotlinx.android.synthetic.main.dialog_reading_book_timer.view.*
-import kotlinx.android.synthetic.main.fragment_book.view.*
-import kotlinx.android.synthetic.main.recycler_chapters_read.view.*
 
 class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
 
@@ -48,13 +45,13 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
             throw IllegalStateException("Context can't be null when creating a dialog.")
         }
 
-        NotificationUtil.createChannel(context!!)
+        NotificationUtil.createChannel(requireContext())
 
-        appRepo = AppRepository(context!!)
+        appRepo = AppRepository(requireContext())
 
         setupDrawables()
 
-        val builder = AlertDialog.Builder(context!!)
+        val builder = AlertDialog.Builder(requireContext())
         val inflater = requireActivity().layoutInflater
         root = inflater.inflate(R.layout.dialog_reading_book, null)
 
@@ -68,12 +65,12 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
     }
 
     private fun setupDrawables() {
-        pauseDrawable = ContextCompat.getDrawable(context!!, R.drawable.ic_pause_24dp)!!
-        playDrawable = ContextCompat.getDrawable(context!!, R.drawable.ic_play_arrow_24dp)!!
+        pauseDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_pause_24dp)!!
+        playDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_play_arrow_24dp)!!
     }
 
     private fun setupGeneralValues() {
-        root.dialog_reading_header.text = getString(R.string.dialog_reading_header, book.book.title)
+        root.dialog_reading_header.text = getString(R.string.reading_book_reading, book.book.title)
 
         root.dialog_reading_start_button.setOnClickListener {
             if (addFirstChapter) {
@@ -90,7 +87,7 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
             root.dialog_reading_timer.start()
             setToggleDrawable()
 
-            NotificationUtil.make(context!!, root.dialog_reading_timer)
+            NotificationUtil.make(requireContext(), getString(R.string.reading_book_reading, book.book.title), root.dialog_reading_timer)
         }
 
         root.dialog_reading_cancel_button.setOnClickListener {
@@ -111,8 +108,10 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
         root.dialog_reading_timer_toggle_play_button.setOnClickListener {
             if (root.dialog_reading_timer.getState() == State.RUNNING) {
                 root.dialog_reading_timer.pause()
+                NotificationUtil.updateStatus(getString(R.string.reading_book_paused, book.book.title))
             } else {
                 root.dialog_reading_timer.start()
+                NotificationUtil.updateStatus(getString(R.string.reading_book_reading, book.book.title))
             }
             setToggleDrawable()
         }
@@ -213,7 +212,7 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
         root.dialog_reading_add_button.isEnabled = true
         root.dialog_reading_add_button.setTextColor(
             ContextCompat.getColor(
-                context!!,
+                requireContext(),
                 R.color.colorPrimary
             )
         )
@@ -223,7 +222,7 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
         root.dialog_reading_add_button.isEnabled = false
         root.dialog_reading_add_button.setTextColor(
             ContextCompat.getColor(
-                context!!,
+                requireContext(),
                 R.color.fontSecondaryColor
             )
         )

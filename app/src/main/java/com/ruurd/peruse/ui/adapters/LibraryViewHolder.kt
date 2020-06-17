@@ -1,12 +1,13 @@
 package com.ruurd.peruse.ui.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import com.ruurd.peruse.R
 import com.ruurd.peruse.data.pojo.FullBookPOJO
 import com.ruurd.peruse.models.Book
+import com.ruurd.peruse.ui.activities.BookActivity
 import com.ruurd.peruse.ui.adapters.abstracts.POJOViewHolder
-import com.ruurd.peruse.ui.fragments.LibraryFragmentDirections
 import kotlinx.android.synthetic.main.recycler_library_book.view.*
 
 class LibraryViewHolder(view: View, var context: Context) :
@@ -31,9 +32,10 @@ class LibraryViewHolder(view: View, var context: Context) :
 
     override fun setupOnClickListener() {
         view.setOnClickListener {
-            navController.navigate(
-                LibraryFragmentDirections.actionNavigationLibraryToBookFragment(pojo.book.bookId)
-            )
+            // Navigate to Book Activity
+            val intent = Intent(context, BookActivity::class.java)
+            intent.putExtra("book_id", pojo.book.bookId)
+            context.startActivity(intent)
         }
     }
 }
