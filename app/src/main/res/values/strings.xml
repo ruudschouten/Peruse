@@ -22,7 +22,8 @@
     <string name="dialog_option_add">Add</string>
     <string name="dialog_option_start">Start</string>
     <string name="dialog_empty_fields_notice">Please fill in all fields in order to create a new %1$s.</string>
-    <string name="dialog_reading_header">Reading %1$s</string>
+    <string name="reading_book_reading">Reading %1$s</string>
+    <string name="reading_book_paused">Paused reading %1$s</string>
     <string name="dialog_reading_chapters_read">Chapters Read</string>
     <string name="dialog_reading_chapter_title">Chapter Title</string>
     <string name="dialog_reading_chapter_pages">Pages</string>
