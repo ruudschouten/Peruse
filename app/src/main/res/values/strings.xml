@@ -43,7 +43,7 @@
     <string name="chapter_calc_fields_empty">One or more fields aren\'t filled in.</string>
     <string name="chapter_calc_end_too_small">End can\'t be smaller or the same as start.</string>
     <string name="chapter_calc_start_zero">Start can\'t be 0.</string>
-    <string name="chapter_calc_result">This chapter would take around \n %1$d minutes and %2$d seconds.</string>
+    <string name="chapter_calc_result">This chapter would take around \n %1$d hours, %2$d minutes and %3$d seconds.</string>
     <string name="dialog_chapter_calculate_time">Calculate Chapter time</string>
     <string name="dialog_chapter_calculate">Calculate</string>
 </resources>

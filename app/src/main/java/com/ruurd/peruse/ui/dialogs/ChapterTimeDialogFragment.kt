@@ -63,8 +63,10 @@ class ChapterTimeDialogFragment(var book: Book) : BottomSheetDialogFragment() {
 
         val chapter = Chapter(start, end)
         val estimate = TimeUtil.toTime(chapter.estimatedDuration(book))
+        val hours = estimate.hours
         val minutes = estimate.minutes
         val seconds = estimate.seconds
-        root.dialog_chapter_status.text = getString(R.string.chapter_calc_result, minutes, seconds)
+        root.dialog_chapter_status.text =
+            getString(R.string.chapter_calc_result, hours, minutes, seconds)
     }
 }
