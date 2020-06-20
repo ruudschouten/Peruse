@@ -66,7 +66,12 @@ class ChapterTimeDialogFragment(var book: Book) : BottomSheetDialogFragment() {
         val hours = estimate.hours
         val minutes = estimate.minutes
         val seconds = estimate.seconds
-        root.dialog_chapter_status.text =
-            getString(R.string.chapter_calc_result, hours, minutes, seconds)
+        if (hours > 0) {
+            root.dialog_chapter_status.text =
+                getString(R.string.chapter_calc_result_full, hours, minutes, seconds)
+        } else {
+            root.dialog_chapter_status.text =
+                getString(R.string.chapter_calc_result, minutes, seconds)
+        }
     }
 }
