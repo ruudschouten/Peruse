@@ -8,10 +8,14 @@
     <TextView
         android:id="@+id/book_chapter_recycler_title"
         style="@style/TextAppearance.MdcTypographyStyles.Subtitle1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_views"
         android:layout_marginTop="@dimen/spacing_views"
+        android:layout_marginEnd="@dimen/spacing_views"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toStartOf="@+id/book_chapter_recycler_pages"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +37,6 @@
         style="@style/TextAppearance.MdcTypographyStyles.Body2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_views"
         android:layout_marginTop="@dimen/spacing_views_small"
         android:layout_marginEnd="@dimen/spacing_views"
         android:textColor="@color/fontSecondaryColor"
