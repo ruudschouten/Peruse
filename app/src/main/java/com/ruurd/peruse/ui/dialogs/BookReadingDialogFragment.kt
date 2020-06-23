@@ -79,6 +79,8 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
                     Chapter(root.chapter_incomplete_title.text.toString(), start, 0)
                 chapterAdapter.entries[0] = firstChapter
 
+                root.dialog_reading_chapter_amount.setText("1")
+
                 root.hideKeyboard()
             }
             root.dialog_reading_start_button_container.visibility = GONE
