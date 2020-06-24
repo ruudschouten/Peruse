@@ -20,7 +20,7 @@ class BookChapterViewHolder(v: View) : POJOViewHolder<ChapterPOJO, Chapter>(v) {
 
     override fun setupViews() {
         view.book_chapter_recycler_title.text = model.title
-        view.book_chapter_recycler_date.text = DateUtil.format(model.date)
+        view.book_chapter_recycler_date.text = DateUtil.formatWithTime(model.date - model.duration)
         view.book_chapter_recycler_pages.text = view.context.getString(R.string.book_chapters_pages, model.pages, model.start, model.end)
         view.book_chapter_recycler_time.text = model.getFormattedTime(view.context)
     }
