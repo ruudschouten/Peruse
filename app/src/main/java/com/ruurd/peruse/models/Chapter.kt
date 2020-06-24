@@ -18,7 +18,7 @@ data class Chapter(
         start: Int,
         end: Int
     ) : this(0L, "", start, end, 0, 0L, 0L) {
-        pages = (end - start) + 2
+        setBookCount()
     }
 
     constructor(
@@ -26,7 +26,7 @@ data class Chapter(
         start: Int,
         end: Int
     ) : this(0L, title, start, end, 0, 0L, 0L) {
-        pages = (end - start) + 2
+        setBookCount()
     }
 
     constructor(
@@ -35,7 +35,7 @@ data class Chapter(
         end: Int,
         date: Long
     ) : this(0L, title, start, end, 0, 0L, date) {
-        pages = (end - start) + 2
+        setBookCount()
     }
 
     constructor(
@@ -45,10 +45,20 @@ data class Chapter(
         duration: Long,
         date: Long
     ) : this(0L, title, start, end, 0, duration, date) {
-        pages = (end - start) + 2
+        setBookCount()
     }
 
     constructor() : this("", 0, 0)
+
+    private fun setBookCount() {
+        pages = (end - start) + 2
+    }
+
+    fun setStartAndEnd(start: Int, end: Int) {
+        this.start = start
+        this.end = end
+        setBookCount()
+    }
 
     fun estimatedDuration(book: Book): Long {
         return pages * book.averagePageTime()

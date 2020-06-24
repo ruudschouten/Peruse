@@ -7,34 +7,33 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ruurd.peruse.R
+import com.ruurd.peruse.data.pojo.ChapterPOJO
 import com.ruurd.peruse.data.pojo.FullBookPOJO
 import com.ruurd.peruse.ui.activities.viewmodels.BookViewModel
 import com.ruurd.peruse.ui.adapters.BookChapterRecyclerViewAdapter
+import com.ruurd.peruse.ui.adapters.interfaces.OnChapterClicked
 import com.ruurd.peruse.ui.dialogs.BookReadingDialogFragment
 import com.ruurd.peruse.ui.dialogs.ChapterTimeDialogFragment
+import com.ruurd.peruse.ui.dialogs.ChapterUpdateDialog
 import kotlinx.android.synthetic.main.activity_book.*
 
-class BookActivity : AppCompatActivity() {
+class BookActivity : AppCompatActivity(), OnChapterClicked {
 
-    private lateinit var viewModel: BookViewModel
+    private lateinit var bookViewModel: BookViewModel
     private lateinit var chapterAdapter: BookChapterRecyclerViewAdapter
 
     private lateinit var book: FullBookPOJO
+    private var bookId : Long = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book)
-        viewModel = ViewModelProvider(this).get(BookViewModel::class.java)
+        bookViewModel = ViewModelProvider(this).get(BookViewModel::class.java)
 
-        val id = intent.extras!!.getLong("book_id")
+        bookId = intent.extras!!.getLong("book_id")
+        updateBook()
 
         setupRecyclerView()
-
-        viewModel.getBook(id).observe(this, Observer { book ->
-            this.book = book
-            setViewValues()
-            setChapters()
-        })
 
         activity_book_calculate.setOnClickListener {
             ChapterTimeDialogFragment(this.book.toModel()).show(supportFragmentManager, "calculate_chapter_time")
@@ -44,6 +43,14 @@ class BookActivity : AppCompatActivity() {
             // Navigate to reading fragment.
             BookReadingDialogFragment(this.book).show(supportFragmentManager, "reading_book")
         }
+    }
+
+    private fun updateBook() {
+        bookViewModel.getBook(bookId).observe(this, Observer { book ->
+            this.book = book
+            setViewValues()
+            setChapters()
+        })
     }
 
     private fun setChapters() {
@@ -57,6 +64,7 @@ class BookActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         chapterAdapter = BookChapterRecyclerViewAdapter(listOf())
+        chapterAdapter.setListener(this)
         activity_book_chapter_list.layoutManager = LinearLayoutManager(this)
         activity_book_chapter_list.adapter = chapterAdapter
     }
@@ -82,5 +90,9 @@ class BookActivity : AppCompatActivity() {
         } else {
             activity_book_calculate.visibility = View.VISIBLE
         }
+    }
+
+    override fun onChapterClicked(chapter: ChapterPOJO) {
+        ChapterUpdateDialog(book.book, chapter).show(supportFragmentManager, "update_chapter")
     }
 }
