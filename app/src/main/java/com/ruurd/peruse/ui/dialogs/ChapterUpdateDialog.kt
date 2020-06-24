@@ -9,7 +9,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.ruurd.peruse.R
 import com.ruurd.peruse.data.pojo.BookPOJO
 import com.ruurd.peruse.data.pojo.ChapterPOJO
-import com.ruurd.peruse.data.repository.BookRepository
 import com.ruurd.peruse.data.repository.ChapterRepository
 import com.ruurd.peruse.ui.dialogs.utils.DialogUtils
 import kotlinx.android.synthetic.main.dialog_chapter_edit.view.*
@@ -25,7 +24,6 @@ class ChapterUpdateDialog(private var bookPojo: BookPOJO, private var chapterPoj
         }
 
         val chapterRepo = ChapterRepository(requireContext())
-        val bookRepo = BookRepository(requireContext())
 
         val builder = AlertDialog.Builder(requireContext())
         val inflater = requireActivity().layoutInflater
