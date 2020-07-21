@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/bottom_menu_calculate"
+        android:icon="@drawable/ic_calculate_24dp"
+        android:title="@string/dialog_chapter_calculate"
+        app:showAsAction="always"
+        />
+    <item android:id="@+id/bottom_menu_chart"
+        android:icon="@drawable/ic_baseline_show_chart"
+        android:title="Chart"
+        />
+</menu>

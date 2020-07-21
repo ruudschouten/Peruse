@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_book"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -49,8 +50,11 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@id/activity_book_bottom_container"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_book_details_container">
 
@@ -87,28 +91,35 @@
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/activity_book_calculate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorSecondaryAccent"
-        android:layout_margin="@dimen/spacing_fab"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_calculate_24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/activity_book_start_reading_fab" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/activity_book_start_reading_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/spacing_fab"
-        android:layout_marginBottom="@dimen/spacing_fab"
-        android:clickable="true"
-        android:focusable="true"
+    <!-- The hacky way of adding 24dp to the height, and removing 24dp from the margin was the only way I could get the FAB to show up the way it should. -->
+    <!-- I would like to change it one day, if this somehow gets fixed. -->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/activity_book_bottom_container"
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_play_arrow_24dp" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/activity_book_bottombar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:fabAlignmentMode="center"
+            android:layout_gravity="bottom"
+            app:backgroundTint="@color/colorPrimary"
+            app:menu="@menu/bottom_app_bar">
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/activity_book_start_reading_fab"
+            style="@style/FabAppearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_anchor="@id/activity_book_bottombar"
+            app:srcCompat="@drawable/ic_play_arrow_24dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

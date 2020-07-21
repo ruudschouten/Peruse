@@ -59,6 +59,8 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.3.0-rc01")
     implementation("androidx.navigation:navigation-dynamic-features-fragment:2.3.0-rc01")
 
+    implementation("com.google.android.material:material:1.2.0-rc01")
+
     implementation("androidx.room:room-runtime:2.2.5")
     implementation("androidx.wear:wear:1.0.0")
     compileOnly("com.google.android.wearable:wearable:2.5.0")

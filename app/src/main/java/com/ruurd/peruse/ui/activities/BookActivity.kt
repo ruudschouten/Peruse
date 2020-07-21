@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.ruurd.peruse.R
 import com.ruurd.peruse.data.pojo.ChapterPOJO
 import com.ruurd.peruse.data.pojo.FullBookPOJO
@@ -23,7 +24,7 @@ class BookActivity : AppCompatActivity(), OnChapterClicked {
     private lateinit var chapterAdapter: BookChapterRecyclerViewAdapter
 
     private lateinit var book: FullBookPOJO
-    private var bookId : Long = 0L
+    private var bookId: Long = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +36,30 @@ class BookActivity : AppCompatActivity(), OnChapterClicked {
 
         setupRecyclerView()
 
-        activity_book_calculate.setOnClickListener {
-            ChapterTimeDialogFragment(this.book.toModel()).show(supportFragmentManager, "calculate_chapter_time")
+        activity_book_bottombar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.bottom_menu_calculate -> {
+                    val model = this.book.toModel()
+
+                    if (model.chapters.isNotEmpty()) {
+                        ChapterTimeDialogFragment(this.book.toModel()).show(
+                            supportFragmentManager,
+                            "calculate_chapter_time"
+                        )
+                    } else {
+                        Snackbar.make(
+                            activity_book,
+                            "Unable to calculate how long reading anything takes",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                    true
+                }
+                R.id.bottom_menu_chart -> {
+                    true
+                }
+                else -> false
+            }
         }
 
         activity_book_start_reading_fab.setOnClickListener {
@@ -83,12 +106,6 @@ class BookActivity : AppCompatActivity(), OnChapterClicked {
             )
         } else {
             activity_book_series.visibility = View.GONE
-        }
-
-        if (model.chapters.isEmpty()) {
-            activity_book_calculate.visibility = View.GONE
-        } else {
-            activity_book_calculate.visibility = View.VISIBLE
         }
     }
 
