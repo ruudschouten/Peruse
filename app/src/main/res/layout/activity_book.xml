@@ -91,7 +91,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <!-- The hacky way of adding 24dp to the height, and removing 24dp from the margin was the only way I could get the FAB to show up the way it should. -->
+    <!-- The hacky way of adding 20dp to the height, was the only way I could get the FAB to show up the way it should. -->
     <!-- I would like to change it one day, if this somehow gets fixed. -->
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/activity_book_bottom_container"
