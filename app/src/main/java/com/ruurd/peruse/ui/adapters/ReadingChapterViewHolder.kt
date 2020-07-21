@@ -36,8 +36,7 @@ class ReadingChapterViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
         return Chapter(
             view.chapter_reading_title.text.toString(),
             start,
-            end,
-            System.currentTimeMillis()
+            end
         )
     }
 }

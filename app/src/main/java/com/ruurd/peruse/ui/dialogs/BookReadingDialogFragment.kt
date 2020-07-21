@@ -40,6 +40,8 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
 
     private lateinit var appRepo: AppRepository
 
+    private var startTime: Long = 0L
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         if (context == null) {
             throw IllegalStateException("Context can't be null when creating a dialog.")
@@ -83,6 +85,7 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
 
                 root.hideKeyboard()
             }
+            startTime = System.currentTimeMillis()
             root.dialog_reading_start_button_container.visibility = GONE
             root.dialog_reading_first_chapter_container.visibility = GONE
             root.dialog_reading_timer_buttons.visibility = VISIBLE
@@ -162,6 +165,7 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
             val durationPerPage = totalDuration / totalPages
 
             for (chapter: Chapter in chapters) {
+                chapter.date = startTime
                 chapter.duration = durationPerPage * chapter.pages
             }
 
