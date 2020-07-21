@@ -69,7 +69,7 @@ object NotificationUtil {
         this.context = context
         val name = "Peruse Timer"
         val descriptionText = "Displays the timer in a notification."
-        val importance = NotificationManager.IMPORTANCE_HIGH
+        val importance = NotificationManager.IMPORTANCE_NONE
         val channel = NotificationChannel(channelId, name, importance).apply {
             description = descriptionText
         }
