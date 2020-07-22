@@ -18,7 +18,7 @@ object TimeUtil {
         )
 
         fun format(context: Context, timeFormat: TimeFormat = TimeFormat.hhMMss): String {
-            if (hours > 1) {
+            if (hours >= 1) {
                 if (timeFormat == TimeFormat.hhMMss)
                     return String.format(
                         context.getString(
@@ -44,7 +44,6 @@ object TimeUtil {
             )
         }
 
-//        fun hoursFormatted() = hours.toString().padStart(2, '0')
         fun hoursFormatted() = hours.toString()
         fun minutesFormatted() = minutes.toString().padStart(2, '0')
         fun secondsFormatted() = seconds.toString().padStart(2, '0')
