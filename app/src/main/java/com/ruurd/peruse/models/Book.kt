@@ -30,6 +30,10 @@ data class Book(
         seriesEntry: Float
     ) : this(0L, title, chapters, author, series, seriesEntry)
 
+    fun totalTime(): Long {
+        return chapters.map { it.duration }.sum()
+    }
+
     fun averageChapterTime(): Long {
         if (chapters.size == 0) {
             return 0
@@ -42,6 +46,10 @@ data class Book(
             return 0
         }
         return chapters.map { it.duration / it.pages }.average().toLong()
+    }
+
+    fun formattedTotalTime(context: Context): String {
+        return TimeUtil.toTime(totalTime()).format(context)
     }
 
     fun formattedAverageChapterTime(context: Context): String {

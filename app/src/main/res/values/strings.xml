@@ -15,6 +15,7 @@
     <string name="book_library_chapters_read">%1$d chapters,</string>
     <string name="book_library_average_time">avg. %1$s</string>
     <string name="book_library_page_average_time">avg. time per page: %1$s</string>
+    <string name="book_time_read">%1$s spent reading.</string>
     <string name="dialog_book_new_header">Add New Book</string>
     <string name="dialog_book_series_checkbox">Is part of a series?</string>
     <string name="dialog_option_discard">Discard</string>

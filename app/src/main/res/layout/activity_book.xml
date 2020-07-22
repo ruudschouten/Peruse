@@ -26,6 +26,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/activity_book_time"
+            style="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/fontSecondaryColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_book_title" />
+
+        <TextView
             android:id="@+id/activity_book_series"
             style="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
             android:layout_width="wrap_content"

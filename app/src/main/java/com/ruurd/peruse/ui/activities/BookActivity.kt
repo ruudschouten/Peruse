@@ -107,6 +107,7 @@ class BookActivity : AppCompatActivity(), OnChapterClicked {
         } else {
             activity_book_series.visibility = View.GONE
         }
+        activity_book_time.text = getString(R.string.book_time_read, model.formattedTotalTime(this))
     }
 
     override fun onChapterClicked(chapter: ChapterPOJO) {
