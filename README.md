@@ -1,17 +1,9 @@
-# Peruse
+# <img src="app\src\main\res\mipmap-mdpi\ic_launcher_round.png"> Peruse
 
-This is a WIP app which can be used to track how long you take to read a chapter, or a few chapters, for any book. An average is then calculated indicating how long an average chapter would take. 
+
+This is a app which can be used to track how long you take to read a chapter, or a few chapters, for any book. An average is then calculated indicating how long an average chapter would take. 
 
 You can then use this data to determine if you can read another chapter before starting your daily commute, or something akin to that.
-
-## Planned Features
-
-A couple of features that I want to include are;
-
-- A screen in which all authors are shown, clicking them would show you all the books and series they've written.
-- A screen for series, clicking them shows the author who's written it and the books which are a part of this series.
-- Adding more protection against entering empty or invalid values in textboxes.
-- Adding GoodReads API calls so your reading progress automatically gets synced with GoodReads.
 
 ## Screenshots
 
