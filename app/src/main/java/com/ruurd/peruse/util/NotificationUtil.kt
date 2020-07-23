@@ -54,6 +54,7 @@ object NotificationUtil {
             .setContentIntent(pendingIntent)
             .setAutoCancel(false)
             .setOngoing(true)
+            .setOnlyAlertOnce(true)
 
         with(NotificationManagerCompat.from(context)) {
             // notificationId is a unique int for each notification that you must define
@@ -69,7 +70,7 @@ object NotificationUtil {
         this.context = context
         val name = "Peruse Timer"
         val descriptionText = "Displays the timer in a notification."
-        val importance = NotificationManager.IMPORTANCE_NONE
+        val importance = NotificationManager.IMPORTANCE_HIGH
         val channel = NotificationChannel(channelId, name, importance).apply {
             description = descriptionText
         }
