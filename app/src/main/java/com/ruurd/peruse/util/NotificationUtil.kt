@@ -48,7 +48,7 @@ object NotificationUtil {
 
         builder = Notification.Builder(context, channelId)
             .setContentTitle(title)
-            .setSmallIcon(R.drawable.ic_calculate_24dp)
+            .setSmallIcon(R.drawable.ic_icon_notification)
             .setContentText(timerView.getFormattedTime(TimeUtil.TimeFormat.COLON))
             .setVisibility(Notification.VISIBILITY_PUBLIC)
             .setContentIntent(pendingIntent)
