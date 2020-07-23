@@ -60,9 +60,8 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toTopOf="@id/activity_book_bottom_container"
+        android:layout_marginBottom="56dp"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_book_bottom_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,12 +100,11 @@
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <!-- The hacky way of adding 20dp to the height, was the only way I could get the FAB to show up the way it should. -->
-    <!-- I would like to change it one day, if this somehow gets fixed. -->
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/activity_book_bottom_container"
         android:layout_width="match_parent"
-        android:layout_height="84dp"
+        android:layout_height="match_parent"
         android:focusable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
