@@ -60,7 +60,7 @@ class TimePeriodTimer : ITimer {
 
     private fun startTimerRoutine() {
         timerRoutine = GlobalScope.launch {
-            while (state == State.RUNNING) {
+            while (state != State.STOPPED) {
                 delay(UPDATE_INTERVAL)
 
                 if (currentTimePeriod != null) {
