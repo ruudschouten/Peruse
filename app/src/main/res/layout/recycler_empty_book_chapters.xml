@@ -10,10 +10,10 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:src="@drawable/ic_open_book_24dp"
-        android:tint="@color/colorFadedGray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/colorFadedGray" />
 
     <TextView
         android:layout_width="wrap_content"

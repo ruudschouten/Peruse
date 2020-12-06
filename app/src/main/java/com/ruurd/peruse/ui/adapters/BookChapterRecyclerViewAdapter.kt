@@ -1,27 +1,25 @@
 package com.ruurd.peruse.ui.adapters
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.ruurd.peruse.R
 import com.ruurd.peruse.data.pojo.ChapterPOJO
+import com.ruurd.peruse.databinding.RecyclerBookChapterBinding
 import com.ruurd.peruse.ui.adapters.abstracts.BaseRecyclerAdapter
 import com.ruurd.peruse.ui.adapters.interfaces.OnChapterClicked
+import com.ruurd.peruse.ui.adapters.viewholders.BookChapterViewHolder
 
 class BookChapterRecyclerViewAdapter(
-    chapters: List<ChapterPOJO>
+    chapters: MutableList<ChapterPOJO>,
+    private val onChapterClicked: OnChapterClicked
 ) : BaseRecyclerAdapter<ChapterPOJO, BookChapterViewHolder>(chapters) {
 
-    private lateinit var onClickListener: OnChapterClicked
-
-    fun setListener(clickListener: OnChapterClicked) {
-        onClickListener = clickListener
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookChapterViewHolder {
-        return BookChapterViewHolder(inflateView(parent, R.layout.recycler_book_chapter))
+        return BookChapterViewHolder(
+            RecyclerBookChapterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: BookChapterViewHolder, position: Int) {
-        holder.setListener(onClickListener)
-        holder.bind(getAt(position))
+        holder.bind(getAt(position), onChapterClicked)
     }
 }

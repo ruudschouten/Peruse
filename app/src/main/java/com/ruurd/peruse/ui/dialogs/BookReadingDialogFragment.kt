@@ -4,7 +4,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.view.View
+import android.view.LayoutInflater
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.inputmethod.EditorInfo
@@ -16,20 +16,15 @@ import com.google.android.material.snackbar.Snackbar
 import com.ruurd.peruse.R
 import com.ruurd.peruse.data.pojo.FullBookPOJO
 import com.ruurd.peruse.data.repository.AppRepository
+import com.ruurd.peruse.databinding.DialogReadingBookBinding
 import com.ruurd.peruse.models.Chapter
 import com.ruurd.peruse.timer.State
 import com.ruurd.peruse.ui.adapters.ReadingChapterRecyclerViewAdapter
-import com.ruurd.peruse.ui.adapters.ReadingChapterViewHolder
+import com.ruurd.peruse.ui.adapters.viewholders.ReadingChapterViewHolder
 import com.ruurd.peruse.util.KeyboardUtil.hideKeyboard
 import com.ruurd.peruse.util.NotificationUtil
-import kotlinx.android.synthetic.main.chapter_incomplete.view.*
-import kotlinx.android.synthetic.main.dialog_reading_book.view.*
-import kotlinx.android.synthetic.main.dialog_reading_book_finished.view.*
-import kotlinx.android.synthetic.main.dialog_reading_book_timer.view.*
 
 class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
-
-    private lateinit var root: View
 
     private lateinit var chapterAdapter: ReadingChapterRecyclerViewAdapter
     private lateinit var firstChapter: Chapter
@@ -42,10 +37,17 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
 
     private var startTime: Long = 0L
 
+    private lateinit var binding: DialogReadingBookBinding
+    private val readingBinding get() = binding.dialogReadingLayout
+    private val finishedReadingBinding get() = binding.dialogFinishedReadingLayout
+    private val incompleteBinding get() = readingBinding.dialogReadingFirstChapter
+    private val timer get() = readingBinding.dialogReadingTimer
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         if (context == null) {
             throw IllegalStateException("Context can't be null when creating a dialog.")
         }
+        binding = DialogReadingBookBinding.inflate(LayoutInflater.from(requireContext()))
 
         NotificationUtil.createChannel(requireContext())
 
@@ -54,15 +56,13 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
         setupDrawables()
 
         val builder = AlertDialog.Builder(requireContext())
-        val inflater = requireActivity().layoutInflater
-        root = inflater.inflate(R.layout.dialog_reading_book, null)
 
         setupGeneralValues()
         setupTimerValues()
         setupFinishedValues()
 
         isCancelable = false
-        builder.setView(root)
+        builder.setView(binding.root)
         return builder.create()
     }
 
@@ -72,60 +72,74 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
     }
 
     private fun setupGeneralValues() {
-        root.dialog_reading_header.text = getString(R.string.reading_book_reading, book.book.title)
+        binding.dialogReadingHeader.text = getString(R.string.reading_book_reading, book.book.title)
 
-        root.dialog_reading_start_button.setOnClickListener {
+        readingBinding.dialogReadingStartButton.setOnClickListener {
             if (addFirstChapter) {
-                val start = root.chapter_incomplete_start.text.toString().toInt()
+                val start = incompleteBinding.chapterIncompleteStart.text.toString().toInt()
                 firstChapter =
-                    Chapter(root.chapter_incomplete_title.text.toString(), start, 0)
-                chapterAdapter.entries[0] = firstChapter
+                    Chapter(incompleteBinding.chapterIncompleteTitle.text.toString(), start, 0)
+                chapterAdapter.setAt(0, firstChapter)
 
-                root.dialog_reading_chapter_amount.setText("1")
+                finishedReadingBinding.dialogReadingChapterAmount.setText("1")
 
-                root.hideKeyboard()
+                binding.root.hideKeyboard()
             }
             startTime = System.currentTimeMillis()
-            root.dialog_reading_start_button_container.visibility = GONE
-            root.dialog_reading_first_chapter_container.visibility = GONE
-            root.dialog_reading_timer_buttons.visibility = VISIBLE
-            root.dialog_reading_timer.start()
+            readingBinding.dialogReadingStartButtonContainer.visibility = GONE
+            readingBinding.dialogReadingFirstChapterContainer.visibility = GONE
+            readingBinding.dialogReadingTimerButtons.visibility = VISIBLE
+            readingBinding.dialogReadingTimer.start()
             setToggleDrawable()
 
-            NotificationUtil.make(requireContext(), getString(R.string.reading_book_reading, book.book.title), root.dialog_reading_timer)
+            NotificationUtil.make(
+                requireContext(),
+                getString(R.string.reading_book_reading, book.book.title),
+                readingBinding.dialogReadingTimer
+            )
         }
 
-        root.dialog_reading_cancel_button.setOnClickListener {
+        readingBinding.dialogReadingCancelButton.setOnClickListener {
             closeDialog()
         }
 
-        root.dialog_reading_add_start_chapter.setOnCheckedChangeListener { _, isChecked ->
+        readingBinding.dialogReadingAddStartChapter.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                root.dialog_reading_first_chapter.visibility = VISIBLE
+                incompleteBinding.root.visibility = VISIBLE
             } else {
-                root.dialog_reading_first_chapter.visibility = GONE
+                incompleteBinding.root.visibility = GONE
             }
             addFirstChapter = isChecked
         }
     }
 
     private fun setupTimerValues() {
-        root.dialog_reading_timer_toggle_play_button.setOnClickListener {
-            if (root.dialog_reading_timer.getState() == State.RUNNING) {
-                root.dialog_reading_timer.pause()
-                NotificationUtil.updateStatus(getString(R.string.reading_book_paused, book.book.title))
+        readingBinding.dialogReadingTimerTogglePlayButton.setOnClickListener {
+            if (timer.getState() == State.RUNNING) {
+                timer.pause()
+                NotificationUtil.updateStatus(
+                    getString(
+                        R.string.reading_book_paused,
+                        book.book.title
+                    )
+                )
             } else {
-                root.dialog_reading_timer.start()
-                NotificationUtil.updateStatus(getString(R.string.reading_book_reading, book.book.title))
+                timer.start()
+                NotificationUtil.updateStatus(
+                    getString(
+                        R.string.reading_book_reading,
+                        book.book.title
+                    )
+                )
             }
             setToggleDrawable()
         }
 
-        root.dialog_reading_timer_stop_button.setOnClickListener {
-            root.dialog_reading_timer.stop()
-            root.dialog_reading_header.text = root.dialog_reading_timer.getFormattedTime()
-            root.dialog_reading_timer_container.visibility = GONE
-            root.dialog_reading_finished_container.visibility = VISIBLE
+        readingBinding.dialogReadingTimerStopButton.setOnClickListener {
+            timer.stop()
+            binding.dialogReadingHeader.text = timer.getFormattedTime()
+            readingBinding.dialogReadingTimerContainer.visibility = GONE
+            finishedReadingBinding.dialogReadingFinishedContainer.visibility = VISIBLE
 
             NotificationUtil.remove()
         }
@@ -133,24 +147,24 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
 
     private fun setupFinishedValues() {
         chapterAdapter = ReadingChapterRecyclerViewAdapter(mutableListOf(Chapter()))
-        root.dialog_reading_chapters.adapter = chapterAdapter
-        root.dialog_reading_chapters.layoutManager = LinearLayoutManager(activity)
+        finishedReadingBinding.dialogReadingChapters.adapter = chapterAdapter
+        finishedReadingBinding.dialogReadingChapters.layoutManager = LinearLayoutManager(activity)
 
-        root.dialog_reading_discard_button.setOnClickListener {
-            root.dialog_reading_timer.onDestroy()
+        finishedReadingBinding.dialogReadingDiscardButton.setOnClickListener {
+            timer.onDestroy()
             closeDialog()
         }
 
-        root.dialog_reading_add_button.setOnClickListener {
+        finishedReadingBinding.dialogReadingAddButton.setOnClickListener {
             var totalPages = 0
             val chapters = mutableListOf<Chapter>()
 
             for (i in 0 until chapterAdapter.itemCount) {
                 val viewHolder =
-                    root.dialog_reading_chapters.findViewHolderForAdapterPosition(i) as ReadingChapterViewHolder
+                    finishedReadingBinding.dialogReadingChapters.findViewHolderForAdapterPosition(i) as ReadingChapterViewHolder
                 if (viewHolder.isAnyFieldEmpty()) {
                     Snackbar.make(
-                        root,
+                        binding.root,
                         "One or more Chapters have missing values.",
                         Snackbar.LENGTH_SHORT
                     ).show()
@@ -161,7 +175,7 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
                 totalPages += chapter.pages
             }
 
-            val totalDuration = root.dialog_reading_timer.getTime()
+            val totalDuration = timer.getTime()
             val durationPerPage = totalDuration / totalPages
 
             for (chapter: Chapter in chapters) {
@@ -174,11 +188,11 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
 
             appRepo.fullUpdate(book)
 
-            root.dialog_reading_timer.onDestroy()
+            timer.onDestroy()
             closeDialog()
         }
 
-        root.dialog_reading_chapter_amount.setOnEditorActionListener { _, actionId, _ ->
+        finishedReadingBinding.dialogReadingChapterAmount.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 updateChaptersRead()
                 false
@@ -186,14 +200,15 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
                 true
             }
         }
-        root.dialog_reading_chapter_amount.addTextChangedListener(afterTextChanged = {
+
+        finishedReadingBinding.dialogReadingChapterAmount.addTextChangedListener(afterTextChanged = {
             updateChaptersRead()
         })
     }
 
     private fun updateChaptersRead() {
         try {
-            val text = root.dialog_reading_chapter_amount.text.toString()
+            val text = finishedReadingBinding.dialogReadingChapterAmount.text.toString()
             val count = text.toInt()
             updateChapterAdapter(count)
             enableAddButton()
@@ -203,7 +218,7 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
     }
 
     private fun updateChapterAdapter(chapterCount: Int) {
-        chapterAdapter.entries.clear()
+        chapterAdapter.clear()
         for (i in 0 until chapterCount) {
             if (i == 0 && addFirstChapter) {
                 chapterAdapter.add(firstChapter)
@@ -215,8 +230,8 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
     }
 
     private fun enableAddButton() {
-        root.dialog_reading_add_button.isEnabled = true
-        root.dialog_reading_add_button.setTextColor(
+        finishedReadingBinding.dialogReadingAddButton.isEnabled = true
+        finishedReadingBinding.dialogReadingAddButton.setTextColor(
             ContextCompat.getColor(
                 requireContext(),
                 R.color.colorPrimary
@@ -225,8 +240,8 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
     }
 
     private fun disableAddButton() {
-        root.dialog_reading_add_button.isEnabled = false
-        root.dialog_reading_add_button.setTextColor(
+        finishedReadingBinding.dialogReadingAddButton.isEnabled = false
+        finishedReadingBinding.dialogReadingAddButton.setTextColor(
             ContextCompat.getColor(
                 requireContext(),
                 R.color.fontSecondaryColor
@@ -235,8 +250,8 @@ class BookReadingDialogFragment(var book: FullBookPOJO) : DialogFragment() {
     }
 
     private fun setToggleDrawable() {
-        root.dialog_reading_timer_toggle_play_button.setImageDrawable(
-            if (root.dialog_reading_timer.getState() == State.RUNNING) pauseDrawable
+        readingBinding.dialogReadingTimerTogglePlayButton.setImageDrawable(
+            if (timer.getState() == State.RUNNING) pauseDrawable
             else playDrawable
         )
     }

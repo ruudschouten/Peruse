@@ -35,9 +35,13 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/dialog_reading_header_container">
 
-        <include layout="@layout/dialog_reading_book_timer" />
+        <include
+            android:id="@+id/dialog_reading_layout"
+            layout="@layout/dialog_reading_book_timer" />
 
-        <include layout="@layout/dialog_reading_book_finished" />
+        <include
+            android:id="@+id/dialog_finished_reading_layout"
+            layout="@layout/dialog_reading_book_finished" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

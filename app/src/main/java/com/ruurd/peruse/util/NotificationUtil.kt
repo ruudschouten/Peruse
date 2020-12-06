@@ -8,10 +8,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationManagerCompat
 import com.ruurd.peruse.R
-import com.ruurd.peruse.timer.State
 import com.ruurd.peruse.timer.ui.TimerView
-import com.ruurd.peruse.ui.activities.BookActivity
-import com.ruurd.peruse.ui.activities.MainActivity
+import com.ruurd.peruse.ui.activities.LibraryActivity
 
 object NotificationUtil {
     private const val channelId: String = "PERUSE_TIMER_CHANNEL"
@@ -39,7 +37,7 @@ object NotificationUtil {
         this.context = context
         this.timerView = timerView
 
-        val intent = Intent(context, MainActivity::class.java)
+        val intent = Intent(context, LibraryActivity::class.java)
         intent.action = Intent.ACTION_MAIN
         intent.addCategory(Intent.CATEGORY_LAUNCHER)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

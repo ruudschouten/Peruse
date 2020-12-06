@@ -5,16 +5,18 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.ruurd.peruse.R
+import com.ruurd.peruse.databinding.TimerLayoutBinding
 import com.ruurd.peruse.timer.ITimer
 import com.ruurd.peruse.timer.State
 import com.ruurd.peruse.timer.TimePeriodTimer
 import com.ruurd.peruse.util.NotificationUtil
 import com.ruurd.peruse.util.TimeUtil
-import kotlinx.android.synthetic.main.timer_layout.view.*
 import kotlinx.coroutines.*
 
 class TimerView(context: Context, attributeSet: AttributeSet) :
-    ConstraintLayout(context, attributeSet), ITimer, ITimer.OnTickListener,
+    ConstraintLayout(context, attributeSet),
+    ITimer,
+    ITimer.OnTickListener,
     ITimer.OnStateChangeListener {
 
     private var timer = TimePeriodTimer()
@@ -38,9 +40,10 @@ class TimerView(context: Context, attributeSet: AttributeSet) :
 
     // region View stuff
 
-    init {
-        LayoutInflater.from(context).inflate(R.layout.timer_layout, this)
+    private var binding: TimerLayoutBinding =
+        TimerLayoutBinding.inflate(LayoutInflater.from(context), this)
 
+    init {
         context.theme.obtainStyledAttributes(attributeSet, R.styleable.TimerView, 0, 0).apply {
             try {
                 timeSize = getDimension(
@@ -60,27 +63,27 @@ class TimerView(context: Context, attributeSet: AttributeSet) :
     }
 
     private fun setTimeTextSize(size: Float) {
-        time_seconds.textSize = size
-        time_minutes.textSize = size
-        time_hours.textSize = size
+        binding.timeSeconds.textSize = size
+        binding.timeMinutes.textSize = size
+        binding.timeHours.textSize = size
     }
 
     private fun setTimeLabelSize(size: Float) {
-        time_seconds_label.textSize = size
-        time_minutes_label.textSize = size
-        time_hours_label.textSize = size
+        binding.timeSecondsLabel.textSize = size
+        binding.timeMinutesLabel.textSize = size
+        binding.timeHoursLabel.textSize = size
     }
 
     private fun setTimeText(currentTime: Long) {
         val time = TimeUtil.toTime(currentTime)
 
-        time_hours.text = time.hoursFormatted()
-        time_minutes.text = time.minutesFormatted()
-        time_seconds.text = time.secondsFormatted()
+        binding.timeSeconds.text = time.secondsFormatted()
+        binding.timeMinutes.text = time.minutesFormatted()
+        binding.timeHours.text = time.hoursFormatted()
     }
 
     private fun setStatusText(state: State) {
-        timer_status.text = when (state) {
+        binding.timerStatus.text = when (state) {
             State.IDLE -> context.getString(R.string.timer_status_idle)
             State.RUNNING -> context.getString(R.string.timer_status_running)
             State.PAUSED -> context.getString(R.string.timer_status_paused)
@@ -130,7 +133,8 @@ class TimerView(context: Context, attributeSet: AttributeSet) :
 
     fun getTime() = timer.getCurrentDuration()
 
-    fun getFormattedTime(format: TimeUtil.TimeFormat = TimeUtil.TimeFormat.hhMMss) = TimeUtil.toTime(getTime()).format(context, format)
+    fun getFormattedTime(format: TimeUtil.TimeFormat = TimeUtil.TimeFormat.hhMMss) =
+        TimeUtil.toTime(getTime()).format(context, format)
 
     fun getTimer() = timer
 
