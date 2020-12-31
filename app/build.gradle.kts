@@ -16,7 +16,7 @@ android {
         minSdkVersion(29)
         targetSdkVersion(30)
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -46,9 +46,9 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.0")
     implementation("androidx.core:core-ktx:1.3.2")
-    implementation("com.google.android.material:material:1.3.0-alpha04")
+    implementation("com.google.android.material:material:1.3.0-beta01")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.2")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.2")
@@ -62,9 +62,12 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.3.2")
     implementation("androidx.navigation:navigation-dynamic-features-fragment:2.3.2")
 
-    implementation("androidx.room:room-runtime:2.2.5")
-    kapt("androidx.room:room-compiler:2.2.5")
-    implementation("androidx.room:room-ktx:2.2.5")
+    implementation("androidx.room:room-runtime:2.2.6")
+    implementation("androidx.appcompat:appcompat:1.2.0")
+    kapt("androidx.room:room-compiler:2.2.6")
+    implementation("androidx.room:room-ktx:2.2.6")
+
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
     testImplementation("junit:junit:4.13.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")

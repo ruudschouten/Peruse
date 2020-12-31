@@ -1,5 +1,6 @@
 package com.ruurd.peruse.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -59,6 +60,17 @@ class BookActivity : AppCompatActivity(), OnChapterClicked {
                     true
                 }
                 R.id.bottom_menu_chart -> {
+                    if (book.chapters.isNullOrEmpty()) {
+                        Snackbar.make(
+                            binding.root,
+                            "Unable to display graphs",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    } else {
+                        val intent = Intent(this, GraphActivity::class.java)
+                        intent.putExtra("book_id", bookId)
+                        startActivity(intent)
+                    }
                     true
                 }
                 else -> false
@@ -72,7 +84,7 @@ class BookActivity : AppCompatActivity(), OnChapterClicked {
     }
 
     private fun updateBook() {
-        bookViewModel.getBook(bookId).observe(this, Observer { book ->
+        bookViewModel.getBook(bookId).observe(this, { book ->
             this.book = book
             setViewValues()
             setChapters()
