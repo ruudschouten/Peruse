@@ -27,8 +27,8 @@ class ChapterRepository(context: Context) : CoroutineScope {
         return dao.getChapters()
     }
 
-    fun get(chapterId: Long) : ChapterPOJO? {
-        return dao.get(chapterId)
+    fun get(chapterId: Long): ChapterPOJO? {
+        return dao.getById(chapterId)
     }
 
     fun getForBook(bookId: Long): List<ChapterPOJO> {
@@ -44,16 +44,18 @@ class ChapterRepository(context: Context) : CoroutineScope {
     }
 
     fun insertOrUpdate(chapters: List<ChapterPOJO>, bookId: Long) = launch {
-        // TODO: Check this :)
         chapters.forEach {
             it.bookId = bookId
-            if (it.chapterId == 0L) {
-                insert(it)
-            } else if (get(it.chapterId) == null) {
-                insert(it)
-            }
-            else {
-                update(it)
+            when {
+                it.chapterId == 0L -> {
+                    insert(it)
+                }
+                get(it.chapterId) == null -> {
+                    insert(it)
+                }
+                else -> {
+                    update(it)
+                }
             }
         }
     }
