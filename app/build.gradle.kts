@@ -12,11 +12,11 @@ android {
     buildToolsVersion("29.0.3")
 
     defaultConfig {
-        applicationId = "com.ruurd.peruse"
+        applicationId = "com.ruurd.peruse_dev"
         minSdkVersion(29)
         targetSdkVersion(30)
-        versionCode = 1
-        versionName = "1.0.1"
+        versionCode = 2
+        versionName = "1.0.2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
