@@ -30,6 +30,13 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun authorDao(): AuthorDao
     abstract fun seriesDao(): SeriesDao
 
+    suspend fun executeCheckpoint() {
+        bookDao().checkpoint()
+        chapterDao().checkpoint()
+        authorDao().checkpoint()
+        seriesDao().checkpoint()
+    }
+
     companion object {
 
         @Volatile

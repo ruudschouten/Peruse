@@ -40,5 +40,5 @@ interface PeruseDao<TPOJO> {
      * Needs to be executed to ensure that all pending transactions are applied.
      */
     @RawQuery
-    fun checkpoint(query: SupportSQLiteQuery? = (SimpleSQLiteQuery("pragma wal_checkpoint(full)"))): Int
+    suspend fun checkpoint(query: SupportSQLiteQuery? = (SimpleSQLiteQuery("pragma wal_checkpoint(full)"))): Int
 }
