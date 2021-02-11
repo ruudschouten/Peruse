@@ -51,4 +51,15 @@
     <string name="dialog_chapter_calculate_time">Calculate Chapter time</string>
     <string name="dialog_chapter_calculate">Calculate</string>
     <string name="dialog_chapter_update_header">Edit Chapter</string>
+    <!--  Settings / Preferences  -->
+    <string name="settings">Settings</string>
+    <string name="backup_data">Backup data</string>
+    <string name="backup_data_key">backup_data</string>
+    <string name="backup_data_summary">Backup data by creating a local copy.</string>
+    <string name="restore_data">Restore data</string>
+    <string name="restore_data_key">restore_data</string>
+    <string name="restore_data_summary">Restore data by selecting a local backup.</string>
+    <string name="backup_location">Backup location</string>
+    <string name="backup_location_key">backup_location</string>
+    <string name="backup_location_summary">The location in which to store the backups.</string>
 </resources>
