@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.GraphActivity">
 
+    <include
+        android:id="@+id/appbar"
+        layout="@layout/app_toolbar" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_start"
         android:layout_width="wrap_content"

@@ -38,11 +38,21 @@ class LibraryActivity : AppCompatActivity() {
         binding.activityLibraryAddButton.setOnClickListener {
             AddBookDialogFragment().show(supportFragmentManager, "new_book")
         }
+
+        setupAppbar()
     }
 
     private fun setSwipeListeners() {
         val itemTouchHelper = ItemTouchHelper(LibrarySwipeCallback(libraryAdapter, viewModel))
         itemTouchHelper.attachToRecyclerView(binding.activityLibraryRecyclerview)
+    }
+
+    private fun setupAppbar() {
+        binding.appbar.settingsButton.visibility = View.VISIBLE
+        binding.appbar.settingsButton.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun updateBooks(books: List<FullBookPOJO>) {

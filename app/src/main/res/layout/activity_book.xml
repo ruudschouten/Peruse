@@ -4,6 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/appbar"
+        layout="@layout/app_toolbar" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/activity_book_details_container"
         android:layout_width="match_parent"
@@ -12,7 +16,7 @@
         android:layout_marginTop="@dimen/spacing_views"
         android:layout_marginEnd="@dimen/spacing_views"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/appbar">
 
         <TextView
             android:id="@+id/activity_book_title"

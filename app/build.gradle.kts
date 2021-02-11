@@ -12,11 +12,11 @@ android {
     buildToolsVersion("29.0.3")
 
     defaultConfig {
-        applicationId = "com.ruurd.peruse"
+        applicationId = "com.ruurd.peruse_dev"
         minSdkVersion(29)
         targetSdkVersion(30)
-        versionCode = 1
-        versionName = "1.0.1"
+        versionCode = 2
+        versionName = "1.0.2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -48,22 +48,23 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.0")
     implementation("androidx.core:core-ktx:1.3.2")
-    implementation("com.google.android.material:material:1.3.0-beta01")
+    implementation("com.google.android.material:material:1.3.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.2")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.2")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.3.3")
     implementation("androidx.recyclerview:recyclerview:1.1.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.0")
 
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.2")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.2")
-    implementation("androidx.navigation:navigation-dynamic-features-fragment:2.3.2")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.3.3")
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:2.3.3")
 
     implementation("androidx.room:room-runtime:2.2.6")
     implementation("androidx.appcompat:appcompat:1.2.0")
+    implementation("androidx.preference:preference-ktx:1.1.1")
     kapt("androidx.room:room-compiler:2.2.6")
     implementation("androidx.room:room-ktx:2.2.6")
 
