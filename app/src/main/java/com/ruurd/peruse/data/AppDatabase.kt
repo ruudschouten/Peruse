@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.ruurd.peruse.data.DataUtil.databaseName
 import com.ruurd.peruse.data.dao.AuthorDao
 import com.ruurd.peruse.data.dao.BookDao
 import com.ruurd.peruse.data.dao.ChapterDao
@@ -29,6 +30,13 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun authorDao(): AuthorDao
     abstract fun seriesDao(): SeriesDao
 
+    suspend fun executeCheckpoint() {
+        bookDao().checkpoint()
+        chapterDao().checkpoint()
+        authorDao().checkpoint()
+        seriesDao().checkpoint()
+    }
+
     companion object {
 
         @Volatile
@@ -45,7 +53,9 @@ abstract class AppDatabase : RoomDatabase() {
         }
 
         private fun buildDatabase(context: Context): AppDatabase {
-            return Room.databaseBuilder(context, AppDatabase::class.java, "peruse_db").build()
+            return Room.databaseBuilder(context, AppDatabase::class.java, databaseName)
+                .setJournalMode(JournalMode.TRUNCATE)
+                .build()
         }
     }
 }
