@@ -50,7 +50,7 @@ class GraphActivity : AppCompatActivity() {
         data.setDrawValues(false)
         binding.bookChart.data = data
         GraphUtil.styleLineChart(binding.bookChart, this)
-        binding.bookChart.xAxis.valueFormatter = object : ValueFormatter() {
+        binding.bookChart.axisLeft.valueFormatter = object : ValueFormatter() {
             override fun getAxisLabel(value: Float, axis: AxisBase?): String {
                 return dateTimeFormatter.format(value)
             }

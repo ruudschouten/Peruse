@@ -44,7 +44,7 @@ object GraphUtil {
         // Put the X axis on the bottom of the graph, instead of above it.
         chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         // Limit this axis to 5 labels.
-        chart.xAxis.setLabelCount(5, true)
+        chart.axisLeft.setLabelCount(8, true)
         // Hide the description view.
         chart.description = null
         // Hide the legend.
@@ -61,8 +61,10 @@ object GraphUtil {
 
     fun bookToEntries(book: Book): ArrayList<Entry> {
         val entries = mutableListOf<Entry>()
+        val first = book.chapters.first()
+        entries.add(Entry(first.start.toFloat(), (first.date - first.duration).toFloat()))
         book.chapters.forEach {
-            entries.add(Entry(it.date.toFloat(), it.end.toFloat()))
+            entries.add(Entry(it.end.toFloat(), it.date.toFloat()))
         }
 
         return entries as ArrayList<Entry>
