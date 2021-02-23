@@ -26,14 +26,9 @@ class LibraryViewHolder(
                 R.string.book_library_average_time,
                 model.formattedAverageChapterTime(context)
             )
-            binding.libraryBookRecyclerAveragePageTime.text = context.getString(
-                R.string.book_library_page_average_time,
-                model.formattedAveragePageTime(context)
-            )
         } else {
             binding.libraryBookRecyclerChapterCount.visibility = View.GONE
             binding.libraryBookRecyclerAverageChapterTime.visibility = View.GONE
-            binding.libraryBookRecyclerAveragePageTime.visibility = View.GONE
         }
         if (model.series != null) {
             binding.libraryBookRecyclerSeries.text = context.getString(

@@ -7,17 +7,18 @@
     <TextView
         android:id="@+id/library_book_recycler_title"
         style="@style/TextAppearance.MdcTypographyStyles.Subtitle1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_views"
         android:layout_marginTop="@dimen/spacing_views"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/library_book_recycler_chapter_count"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/library_book_recycler_series"
         style="@style/TextAppearance.MdcTypographyStyles.Body2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_views"
         android:textColor="@color/fontSecondaryColor"
@@ -44,17 +45,5 @@
         android:textColor="@color/fontSecondaryColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/library_book_recycler_average_page_time"
-        style="@style/TextAppearance.MdcTypographyStyles.Body2"
-        android:textSize="@dimen/text_size_small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_views_small"
-        android:layout_marginEnd="@dimen/spacing_views"
-        android:textColor="@color/fontSecondaryColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/library_book_recycler_average_chapter_time" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
